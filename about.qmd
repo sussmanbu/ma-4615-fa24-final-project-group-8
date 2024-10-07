@@ -31,6 +31,10 @@ Jack is a undergraduate senior studying Statistics and Urban Studies. His intere
 Urban Planning/mapping, running, and music (especially 90s r&b/hip hop). He can be found 
 at https://github.com/jmosk25 
 
+## Richard Pilleul
+Richard is an undergraduate junior studying Economics and Mathematics. His interests include economic research, finance, and sports. He can be found at https://github.com/RichardPilleul.
+
+
 <!-- Please leave in the information below -->
 
 ### About this Template.
