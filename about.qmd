@@ -26,6 +26,10 @@ The members of this team are below.
 
 Riya is an undergraduate senior studying Data Science and Business Administration. Her interests include investing, cooking, and running. She can be found at https://github.com/riya21parikh.
 
+## Jakob (Jack) Moskowitz 
+Jack is a undergraduate senior studying Statistics and Urban Studies. His interests include 
+Urban Planning/mapping, running, and music (especially 90s r&b/hip hop). He can be found 
+at https://github.com/jmosk25 
 
 <!-- Please leave in the information below -->
 
