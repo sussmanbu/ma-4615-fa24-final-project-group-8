@@ -23,7 +23,6 @@ This is a website for the final project for MA415 Data Science with R by Team 8.
 The members of this team are below.
 
 ## Riya Parikh
-
 Riya is an undergraduate senior studying Data Science and Business Administration. Her interests include investing, cooking, and running. She can be found at https://github.com/riya21parikh.
 
 ## Jakob (Jack) Moskowitz 
@@ -33,6 +32,9 @@ at https://github.com/jmosk25
 
 ## Richard Pilleul
 Richard is an undergraduate junior studying Economics and Mathematics. His interests include economic research, finance, and sports. He can be found at https://github.com/RichardPilleul.
+
+## Maika Takemoto
+Maika is an undergraduate senior studying Computer Science and Mathematics. Her interests include graphic design, dancing, and watching movies. She can be found at https://github.com/maikatakemoto.
 
 
 <!-- Please leave in the information below -->
