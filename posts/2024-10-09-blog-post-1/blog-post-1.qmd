@@ -1,0 +1,61 @@
+---
+title: "Blog Post 1"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-10-09"
+date-modified: "2024-10-09"
+draft: FALSE
+---
+**Dataset 1: [Health Insurance Coverage in the USA 1979-2019](https://www.kaggle.com/datasets/asaniczka/health-insurance-coverage-in-the-usa-1979-2019)**
+
+
+The dataset is sourced from the Economic Policy Institute’s State of Working America Data Library, which offers a comprehensive collection of economic data. The data was originally collected through EPI’s analysis of Current Population Survey Annual Social and Economic Supplement microdata. This dataset primarily focuses on employer-sponsored health insurance (ESI) coverage among private-sector workers in the United States. The "Health Insurance Coverage in the USA (1979-2019)" dataset from Kaggle contains data spanning 40 years, from 1979 to 2019, tracking various types of insurance coverage in the U.S. We’ve been able to load the dataset to see that it consists of 41 rows (representing each year) and 17 columns that cover demographic information, such as race, gender, coverage, and education level. 
+
+Some questions we aim to answer include:
+
+1. Comparing the ESI coverage rates among different demographic groups (e.g., race, gender, education level) and analyze any disparities or variations.
+2. Determining the demographic group with the highest/lowest ESI coverage rate and investigating the underlying factors contributing to the difference.
+3. Evaluating the impact of education level on ESI coverage and exploring how coverage rates differ for high school graduates versus college graduates.
+
+Some challenges we anticipate facing while answering these questions are:
+
+1. Missing data from earlier years or specific subgroups could skew results.
+2. Understanding how different policies impacted insurance coverage at different points can be complex. 
+3. Aggregated data might not show nuances at the state level
+
+
+**Dataset 2: [2022-2023 Public School Enrollments by Race/Ethnicity](https://nces.ed.gov/ccd/elsi/tableGenerator.aspx?savedTableID=649127)**
+
+This is a sample table created by the data set provided by the National Center for Education Statistics, sourced from Common Core of Data. The dataset is highly customizable, allowing for the selection of additional variables, sorting, and deletion of columns as needed. The current sample table includes 14 columns and over 10,000 rows. The data is available in both CSV and Excel formats, making it easy to load and clean using standard data processing tools.
+The data was originally collected by the NCES to provide a comprehensive, annual accounting of public elementary and secondary education in the U.S. It covers key metrics such as enrollment, demographics, and funding across various school districts, helping to inform educational policy and research. The data can be loaded easily, and any necessary cleaning or transformations (e.g., handling missing values, renaming columns) can be performed once loaded into a data processing tool.
+
+The main questions we aim to address include:
+
+1. What does racial enrollment look like in public schools across the country?
+2. Do certain racial groups experience decreased enrollment as they progress through higher levels of education?
+3. How does district funding differ in predominantly White districts compared to predominantly POC districts?
+4. What is the racial disparity in enrollment between private and public schools?
+5. How have racial trends in enrollment evolved over time for both public and private schools/districts?
+
+Some challenges might include:
+
+1. The large size of the dataset (especially when including additional years) may require more computational resources.
+2. Missing or incomplete data could introduce bias or skew the results, making it necessary to account for these gaps during analysis.
+
+
+
+**Dataset 3: [Households in Mobile Homes (Percent) by Race/Ethnicity](https://data.diversitydatakids.org/dataset/25032_3_p-households-in-mobile-homes--percent--by-race-ethnicity?_external=True)** 
+
+This data set is provided by diversitydatakids.org, an organization that aims to provide equitable opportunities for children. The data set has information for different states and the percentage of mobile homes based on race and ethnicity, with 459 rows and 17 columns - spanning from years 2009 to 2017. Since the organization’s main aim is to create equitable opportunities for children, they are focused on facilitating a “rigorous, equity-focused” research program that could possibly contribute to policy change regarding resource allocation. The data is downloadable once registered, has filters and a data dictionary for the columns - which could be useful for data cleaning. It also has a data API for accessing the dataset.
+
+The main questions we aim to answer include:
+
+1. Does the number of people living in mobile homes differ significantly across racial demographics?
+2. Over the years, has there been a change in the demographics that live in mobile homes? How has this change been different for certain states as compared to others?
+3. Has the total number of people living in mobile homes changed between 2009 and 2017? Can we observe a trend?
+
+Some challenges we may face:
+
+1. Missing values in the dataset could skew results. 
+2. Removal of missing values during data cleaning could potentially lead to loss of valuable information. 
+3. Certain states are missing data for specific years, which could be challenging when comparing that state to another. 
+
