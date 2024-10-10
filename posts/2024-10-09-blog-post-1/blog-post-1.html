@@ -6,11 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Daniel Sussman">
-<meta name="dcterms.date" content="2024-02-21">
-<meta name="description" content="This post details the steps you’ll take for your first team meeting.">
+<meta name="author" content="Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker.">
+<meta name="dcterms.date" content="2024-10-09">
 
-<title>MA [46]15 Final Project - First Team Meeting</title>
+<title>MA [46]15 Final Project - Blog Post 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,13 +117,8 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">First Team Meeting</h1>
-                  <div>
-        <div class="description">
-          <p>This post details the steps you’ll take for your first team meeting.</p>
-        </div>
-      </div>
-                </div>
+      <h1 class="title">Blog Post 1</h1>
+                      </div>
   </div>
     
   
@@ -133,21 +127,21 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Daniel Sussman </p>
+               <p>Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker. </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 21, 2024</p>
+        <p class="date">October 9, 2024</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 21, 2024</p>
+        <p class="date-modified">October 9, 2024</p>
       </div>
     </div>
       
@@ -165,24 +159,49 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="a-business-team-giving-fist-bump-in-agreement.jpg" class="img-fluid"></p>
-<p>These are the steps that you will take today to get started on your project. Today, you will just be brainstorming, and then next week, you’ll get started on the main aspects of the project.</p>
+<p><strong>Dataset 1: <a href="https://www.kaggle.com/datasets/asaniczka/health-insurance-coverage-in-the-usa-1979-2019">Health Insurance Coverage in the USA 1979-2019</a></strong></p>
+<p>The dataset is sourced from the Economic Policy Institute’s State of Working America Data Library, which offers a comprehensive collection of economic data. The data was originally collected through EPI’s analysis of Current Population Survey Annual Social and Economic Supplement microdata. This dataset primarily focuses on employer-sponsored health insurance (ESI) coverage among private-sector workers in the United States. The “Health Insurance Coverage in the USA (1979-2019)” dataset from Kaggle contains data spanning 40 years, from 1979 to 2019, tracking various types of insurance coverage in the U.S. We’ve been able to load the dataset to see that it consists of 41 rows (representing each year) and 17 columns that cover demographic information, such as race, gender, coverage, and education level.</p>
+<p>Some questions we aim to answer include:</p>
 <ol type="1">
-<li>Start by introducing yourselves to each other. I also recommend creating a private channel on Microsoft Teams with all your team members. This will be a place that you can communicate and share ideas, code, problems, etc.</li>
-<li>Discuss what aspects of the project each of you are more or less excited about. These include
-<ol type="a">
-<li>Collecting, cleaning, and munging data ,</li>
-<li>Statistical Modeling,</li>
-<li>Visualization,</li>
-<li>Writing about analyses, and</li>
-<li>Managing and reviewing team work.</li>
-</ol></li>
-<li>Based on this, discuss where you feel your strengths and weaknesses might be.</li>
-<li>Next, start brainstorming questions you hope to answer as part of this project. This question should in some way be addressing issues around racial disparities. The questions you come up with should be at the level of the question we started with when exploring the HMDA data. (“Are there differences in the ease of securing a loan based on the race of the applicant?”) You’ll revise your questions a lot over the course of the project. Come up with a few questions that your group might be interested in exploring.</li>
-<li>Based on these questions, start looking around for data that might help you analyze this. If you are looking at U.S. based data, <a href="data.gov">data.gov</a> is a good source and if you are looking internationally, I recommend checking out the World Bank. Also, try Googling for data. Include “data set” or “dataset” in your query. You might even include “CSV” or some other format. Using “data” by itself in your query often doesn’t work too well. Spend some time searching for data and try to come up with at least three possible data sets. (For your first blog post, you’ll write short proposals about each of them that I’ll give feedback on.)</li>
-<li>Come up with a team name. Next week, I’ll provide the Github Classroom assignment that will be where you work on your final project and you’ll have to have your team name finalized by then. Your project will be hosted online at the website with a URL like <code>sussmanbu.github.io/ma4615-fa23-final-project-TEAMNAME</code>.</li>
+<li>Comparing the ESI coverage rates among different demographic groups (e.g., race, gender, education level) and analyze any disparities or variations.</li>
+<li>Determining the demographic group with the highest/lowest ESI coverage rate and investigating the underlying factors contributing to the difference.</li>
+<li>Evaluating the impact of education level on ESI coverage and exploring how coverage rates differ for high school graduates versus college graduates.</li>
 </ol>
-<p>Next time, you’ll get your final project website set up and write your first blog post.</p>
+<p>Some challenges we anticipate facing while answering these questions are:</p>
+<ol type="1">
+<li>Missing data from earlier years or specific subgroups could skew results.</li>
+<li>Understanding how different policies impacted insurance coverage at different points can be complex.</li>
+<li>Aggregated data might not show nuances at the state level</li>
+</ol>
+<p><strong>Dataset 2: <a href="https://nces.ed.gov/ccd/elsi/tableGenerator.aspx?savedTableID=649127">2022-2023 Public School Enrollments by Race/Ethnicity</a></strong></p>
+<p>This is a sample table created by the data set provided by the National Center for Education Statistics, sourced from Common Core of Data. The dataset is highly customizable, allowing for the selection of additional variables, sorting, and deletion of columns as needed. The current sample table includes 14 columns and over 10,000 rows. The data is available in both CSV and Excel formats, making it easy to load and clean using standard data processing tools. The data was originally collected by the NCES to provide a comprehensive, annual accounting of public elementary and secondary education in the U.S. It covers key metrics such as enrollment, demographics, and funding across various school districts, helping to inform educational policy and research. The data can be loaded easily, and any necessary cleaning or transformations (e.g., handling missing values, renaming columns) can be performed once loaded into a data processing tool.</p>
+<p>The main questions we aim to address include:</p>
+<ol type="1">
+<li>What does racial enrollment look like in public schools across the country?</li>
+<li>Do certain racial groups experience decreased enrollment as they progress through higher levels of education?</li>
+<li>How does district funding differ in predominantly White districts compared to predominantly POC districts?</li>
+<li>What is the racial disparity in enrollment between private and public schools?</li>
+<li>How have racial trends in enrollment evolved over time for both public and private schools/districts?</li>
+</ol>
+<p>Some challenges might include:</p>
+<ol type="1">
+<li>The large size of the dataset (especially when including additional years) may require more computational resources.</li>
+<li>Missing or incomplete data could introduce bias or skew the results, making it necessary to account for these gaps during analysis.</li>
+</ol>
+<p><strong>Dataset 3: <a href="https://data.diversitydatakids.org/dataset/25032_3_p-households-in-mobile-homes--percent--by-race-ethnicity?_external=True">Households in Mobile Homes (Percent) by Race/Ethnicity</a></strong></p>
+<p>This data set is provided by diversitydatakids.org, an organization that aims to provide equitable opportunities for children. The data set has information for different states and the percentage of mobile homes based on race and ethnicity, with 459 rows and 17 columns - spanning from years 2009 to 2017. Since the organization’s main aim is to create equitable opportunities for children, they are focused on facilitating a “rigorous, equity-focused” research program that could possibly contribute to policy change regarding resource allocation. The data is downloadable once registered, has filters and a data dictionary for the columns - which could be useful for data cleaning. It also has a data API for accessing the dataset.</p>
+<p>The main questions we aim to answer include:</p>
+<ol type="1">
+<li>Does the number of people living in mobile homes differ significantly across racial demographics?</li>
+<li>Over the years, has there been a change in the demographics that live in mobile homes? How has this change been different for certain states as compared to others?</li>
+<li>Has the total number of people living in mobile homes changed between 2009 and 2017? Can we observe a trend?</li>
+</ol>
+<p>Some challenges we may face:</p>
+<ol type="1">
+<li>Missing values in the dataset could skew results.</li>
+<li>Removal of missing values during data cleaning could potentially lead to loss of valuable information.</li>
+<li>Certain states are missing data for specific years, which could be challenging when comparing that state to another.</li>
+</ol>
 
 
 
