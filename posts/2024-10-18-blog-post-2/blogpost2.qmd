@@ -1,0 +1,23 @@
+---
+title: "Blog Post 2"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-10-09"
+date-modified: "2024-10-18"
+draft: FALSE
+---
+**Raw data: https://nces.ed.gov/ccd/elsi/**
+**Demographic Data: City-Data.com - Stats about all US cities - real estate, relocation info, crime, house prices, cost of living, races, home value estimator, recent sales, income, photos, schools, maps, weather, neighborhoods, and more**
+
+**Where does the data come from? Who collected it? Why was it collected? Are you able to find the data from the original source?**
+The data comes from the National Center of Education Statistics, a federal agency appointed to serve the U.S. department of education. The data is collected using two primary surveys: The Common Core of Data (CCD) and the Private School Survey (PSS). The data from these two surveys come from a collection of other sources; primarily the state dropout and completion data file, and Local Education Agency Universal Survey. Finance data was also utilized for certain variables. The Institute of Education Sciences collected the data to analyze “education trends”, to further initiatives to improve access to higher education. Finding the data from the original source is possible but tedious, as data is collected by state and locally. 
+
+**Are there any issues you can see with how the data was collected? What is the sample population? Are there reasons to think the sample is biased in some way?**
+The data is collected through two surveys: the Common Core of Data (CCD) and the Private School Survey (PSS). This sample population includes both public and private schools across the nation, ranging from elementary to secondary education. One notable issue is the data scarcity at the high school level and beyond, where information becomes limited. Additionally, there is potential for bias, as not all public schools use the Common Core standards; in fact, only 41 out of 50 states implement Common Core. This may result in a dataset that is biased towards those self-selecting into Common Core and disproportionately representative of certain states, potentially overlooking others. 
+
+**How is this data used? Has there been other research on the same data? Is this data being used for some policy decisions? What questions have others asked about this data?**
+One can find multiple research conducted on data from the Common Core of Data (CCD) and the Private School Survey (PSS). This includes investigating research questions like “How Many Central City High Schools Have A Severe Dropout Problem, Where Are They Located, and Who Attends Them?”, which looks at a geographic and demographic analysis of the data. Some reports have used the data to ask questions surrounding the Characteristics of At-Risk of school failure students. The NCES (National Center of Education Statistics) also has a Education Demographic and Geographic Estimates (EDGE) program which provides geospatial data and creates socio-economic and housing condition indicators for school-going children, that is provided to policymakers.
+Links to referred studies: https://escholarship.org/uc/item/6wx120pt, https://eric.ed.gov/?id=ED566856 
+
+
+**Data for Equity**
+The article mentions three key principles related to data practice: Beneficence, Respect for persons, and Justice. Beneficence plays a key role in our project, as we want to ensure our analysis and conclusions are insightful and that they do not harm any communities. One way we can do this is to be transparent about any limitations in the data and in our analysis. For example, instead of making unsupported conclusions that may harm the reputation of a particular group of people, we have to acknowledge the limitations of the data set and analysis. Not being transparent may also lead to potential misuse of the data or our results which can further harm certain communities. Respect for persons is another principle that is important to keep in mind when working with data. If we were the ones collecting data, it is crucial that the collection process includes informed consent, consideration for all groups of people, and respecting the privacy and personal details of the respondents. In relation to the public school enrollment data set, we could maintain this principle by ensuring the data we work with and the results of our project respect the privacy of the individuals. It is assumed that the data sets do not include any sensitive personal information but if that is not the case, it is something that can be dealt with in the cleaning phase and something to keep in mind when reporting our findings.  

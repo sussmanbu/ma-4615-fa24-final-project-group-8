@@ -42,7 +42,6 @@ Some challenges might include:
 2. Missing or incomplete data could introduce bias or skew the results, making it necessary to account for these gaps during analysis.
 
 
-
 **Dataset 3: [Households in Mobile Homes (Percent) by Race/Ethnicity](https://data.diversitydatakids.org/dataset/25032_3_p-households-in-mobile-homes--percent--by-race-ethnicity?_external=True)** 
 
 This data set is provided by diversitydatakids.org, an organization that aims to provide equitable opportunities for children. The data set has information for different states and the percentage of mobile homes based on race and ethnicity, with 459 rows and 17 columns - spanning from years 2009 to 2017. Since the organization’s main aim is to create equitable opportunities for children, they are focused on facilitating a “rigorous, equity-focused” research program that could possibly contribute to policy change regarding resource allocation. The data is downloadable once registered, has filters and a data dictionary for the columns - which could be useful for data cleaning. It also has a data API for accessing the dataset.
