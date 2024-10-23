@@ -58,6 +58,14 @@ You might consider using the `here` function from the [`here` package](https://h
 
 ### Load and clean data script
 
+```{r}
+source(
+  "scripts/ELSI Full Preliminary Data.csv",
+  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
+)
+```
+
+
 The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them.
 This file might create a derivative data set that you then use for your subsequent analysis.
 Note that you don't need to run this script from every post/page.
