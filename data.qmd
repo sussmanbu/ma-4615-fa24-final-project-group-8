@@ -60,7 +60,7 @@ You might consider using the `here` function from the [`here` package](https://h
 
 ```{r}
 source(
-  "scripts/ELSI Full Preliminary Data.csv",
+  "scripts/ELSI Preliminary Data.R",
   echo = TRUE # Use echo=FALSE or omit it to avoid code output  
 )
 ```
