@@ -58,17 +58,11 @@ You might consider using the `here` function from the [`here` package](https://h
 
 ### Load and clean data script
 ```{r}
-our_data <- read_csv(here::here("dataset", "ELSIPreliminaryDataSet.csv"), skip = 5, col_names = TRUE)
-```
-
-
-```{r}
 source(
-  "scripts/ELSIPreliminaryDataSet.R",
-  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
+  "scripts/clean_data.R",
+  echo = FALSE # Use echo=FALSE or omit it to avoid code output  
 )
 ```
-
 
 The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them.
 This file might create a derivative data set that you then use for your subsequent analysis.
