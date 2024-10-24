@@ -57,10 +57,14 @@ You should never use absolute paths (eg. `/Users/danielsussman/path/to/project/`
 You might consider using the `here` function from the [`here` package](https://here.r-lib.org/articles/here.html) to avoid path problems.
 
 ### Load and clean data script
+```{r}
+our_data <- read_csv(here::here("dataset", "ELSIPreliminaryDataSet.csv"), skip = 5, col_names = TRUE)
+```
+
 
 ```{r}
 source(
-  "scripts/ELSI Preliminary Data.R",
+  "scripts/ELSIPreliminaryDataSet.R",
   echo = TRUE # Use echo=FALSE or omit it to avoid code output  
 )
 ```
