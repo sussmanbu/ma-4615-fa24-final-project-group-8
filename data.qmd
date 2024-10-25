@@ -68,7 +68,7 @@ The idea behind this file is that someone coming to your website could largely r
 This file might create a derivative data set that you then use for your subsequent analysis.
 Note that you don't need to run this script from every post/page.
 Instead, you can load in the results of this script, which could be plain text files or `.RData` files. In your data page you'll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes.
-To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` wich appears as [cleaning script](/scripts/load_and_clean_data.R). 
+To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` which appears as [cleaning script](/scripts/load_and_clean_data.R). 
 
 ----
 
@@ -83,11 +83,99 @@ You will
   * If you have many variables then only describe the most relevant ones and summarize the rest.
 * Describe any cleaning you had to do for your data.
   * You *must* include a link to your `load_and_clean_data.R` file.
-  * Rrename variables and recode factors to make data more clear.
+  * Rename variables and recode factors to make data more clear.
   * Also, describe any additional R packages you used outside of those covered in class.
   * Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.
   * Some repetition of what you do in your `load_and_clean_data.R` file is fine and encouraged if it helps explain what you did.
 * Organization, clarity, cleanliness of the page
   * Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.
   * This page should be self-contained.
-  
+
+
+----
+## Our work: On this page
+
+The data (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of 
+Education Statistics, a federal agency appointed to serve the U.S. department 
+of education. The data is collected using two primary surveys: The Common Core 
+of Data (CCD) and the Private School Survey (PSS). The data from these two 
+surveys come from a collection of other sources; primarily the state dropout 
+and completion data file, and Local Education Agency Universal Survey. Finance 
+data was also utilized for certain variables. The Institute of Education 
+Sciences collected the data to analyze “education trends”, to further 
+initiatives to improve access to higher education. Finding the data from the 
+original source is possible but tedious, as data is collected by state and 
+locally. 
+
+In our `clean_data.R` file, the code snippet utilizes the
+`tidyverse` package to handle data manipulation and analysis tasks
+efficiently. It reads in a RData file named `clean_data.R`
+located within the `datasets` directory using the `load()` function. The
+cleaned data is saved as an `.rds` file named `our_data_clean.rds` in
+the `scripts` directory using the `saveRDS` function. This ensures that
+the cleaned data set can be easily accessed and shared for future
+analyses. Additionally, the `readRDS` function is used to read the saved
+`.rds` file, enabling the retrieval of the cleaned data set for further
+processing or exploration.
+
+```{r}
+source(
+  "scripts/clean_data.R",
+  echo = FALSE # Use echo=FALSE or omit it to avoid code output,
+)
+```
+
+Currently, we are only looking at the one ELSI data file, but we plan to 
+incorporate more as we progress in our project timeline for auxiliary analyses. 
+
+The following variables are currently included in our dataset: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,    American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important 
+contributing factors to school enrollment. Race/Ethnicity can reflect cultural 
+differences and disparities in access to resources in segregated communities, 
+thus it is important to analyze how systemic issues affect enrollment and cross
+reference grade as well to compare effects. Gender can also have a significant 
+effect based on certain disparities in mental health and learning disabilities 
+that can be found between males and females. Finally, we felt Pupil/Teacher 
+ratio was another important factor as certain school districts in lower income 
+communities tend to be deprived of resources (due to smaller tax base), thus 
+this could lower enrollment as parents or students may feel they get less out 
+of school. 
+
+Data Cleaning and Preprocessing - Our initial step involved  data 
+cleaning to ensure data integrity and accuracy. This included removing all 
+‘NA’ values based on the following criteria:
+
+‘†’ represented data that was inapplicable, which we converted to NA for 
+clarity.  
+‘-’ denoted missing data,   
+while ‘‡’ indicated data not meeting our quality standards.  
+Both were also transformed to NA.  
+We then removed rows containing any NA values to create a consistent 
+and reliable dataset. Additionally, all negative values were eliminated, as they
+were considered erroneous entries.  
+Moreover, some standardization of state names was done to ensure that we were 
+not counting duplicates of states which only differed by capitalization. 
+
+Future Dataset Restructuring. 
+To support more detailed analysis, we’re considering restructuring the dataset 
+by segmenting it into various tables based on factors like academic year, grade,
+and gender. Here are two specific areas of interest:  
+
+Academic Year - By organizing data by academic year, we can examine trends  
+impacted by significant events like COVID-19. For instance, research suggests 
+the pandemic increased "social avoidance," particularly among male students, 
+leading to decreased motivation for school attendance due to diminished social interaction. Among younger students, parental choices rooted in safety habits 
+established during the pandemic may also contribute to attendance shifts. 
+By segmenting attendance data by grade over academic years, we can better 
+understand these nuances.  
+
+Gender and Race - Our data enables us to explore how systemic issues affect 
+enrollment patterns. Given the historical context of redlining and segregation 
+in the U.S., students of certain racial backgrounds are more likely to reside in resource-limited areas, impacting their educational opportunities. Analyzing 
+enrollment by race and gender can illuminate the ways these structural factors 
+shape enrollment trends in public schools, providing insights into broader 
+social inequities.
+
+This restructured dataset, segmented by academic year, grade, gender, and race, 
+will allow us to uncover patterns and generate insights into the various 
+influences on school enrollment and attendance, supporting a comprehensive 
+analysis of educational trends and their underlying factors.
