@@ -339,16 +339,9 @@ Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`Sc
 <p>The data (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of Education Statistics, a federal agency appointed to serve the U.S. department of education. The data is collected using two primary surveys: The Common Core of Data (CCD) and the Private School Survey (PSS). The data from these two surveys come from a collection of other sources; primarily the state dropout and completion data file, and Local Education Agency Universal Survey. Finance data was also utilized for certain variables. The Institute of Education Sciences collected the data to analyze “education trends”, to further initiatives to improve access to higher education. Finding the data from the original source is possible but tedious, as data is collected by state and locally.</p>
 <p>In our <code>clean_data.R</code> file, the code snippet utilizes the <code>tidyverse</code> package to handle data manipulation and analysis tasks efficiently. It reads in a RData file named <code>clean_data.R</code> located within the <code>datasets</code> directory using the <code>load()</code> function. The cleaned data is saved as an <code>.rds</code> file named <code>our_data_clean.rds</code> in the <code>scripts</code> directory using the <code>saveRDS</code> function. This ensures that the cleaned data set can be easily accessed and shared for future analyses. Additionally, the <code>readRDS</code> function is used to read the saved <code>.rds</code> file, enabling the retrieval of the cleaned data set for further processing or exploration.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/clean_data.R"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span> <span class="co"># Use echo=FALSE or omit it to avoid code output,</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"scripts/clean_data.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 104698 Columns: 57
 ── Column specification ────────────────────────────────────────────────────────
@@ -357,14 +350,6 @@ chr (57): School Name, State Name [Public School] Latest available year, Gra...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There were 4 warnings in `filter()`.
-The first warning was:
-ℹ In argument: `&amp;...`.
-Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`School Name`)) ``:
-! NAs introduced by coercion
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.</code></pre>
 </div>
 </div>
 <p>Currently, we are only looking at the one ELSI data file, but we plan to incorporate more as we progress in our project timeline for auxiliary analyses.</p>
