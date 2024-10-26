@@ -119,9 +119,8 @@ analyses. Additionally, the `readRDS` function is used to read the saved
 processing or exploration.
 
 ```{r}
-source(
-  "scripts/clean_data.R",
-  echo = FALSE # Use echo=FALSE or omit it to avoid code output,
+suppressWarnings(
+  source("scripts/clean_data.R", echo = FALSE)
 )
 ```
 
