@@ -12,6 +12,8 @@ We also found inconsistencies in state name formatting—some, like Texas, were 
 
 Additionally, while cleaning for missing values, we observed that rows with excessive N/A values were being removed, which inadvertently led to the loss of many state names and potential bias in our analysis.
 
+To avoid warnings, we will also ensure that all columns have appropriate data types.
+
 **Preliminary Data Analysis**
 To explore primary insights that our dataset could provide, we plotted a bar chart with the number of schools in each state.
 
