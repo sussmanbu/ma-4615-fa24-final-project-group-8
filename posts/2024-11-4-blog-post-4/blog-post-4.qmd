@@ -1,0 +1,97 @@
+---
+title: "Blog Post 4"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-11-04"
+date-modified: "2024-11-04"
+draft: FALSE
+---
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+clean_data_format_1 <- our_data_clean |> select(`School Name`, `State Name [Public School] Latest available year`,`Grades 1-8 Students [Public School] 2022-23`:`Grades 1-8 Students [Public School] 2018-19`)
+
+df_cdf_1 <- data.frame(clean_data_format_1)
+names(df_cdf_1)[2] <- "state_name"
+names(df_cdf_1)[3] <- "2022" 
+names(df_cdf_1)[4] <- "2021"  
+names(df_cdf_1)[5] <- "2020" 
+names(df_cdf_1)[6] <- "2019"  
+names(df_cdf_1)[7] <- "2018"
+ df_cdf_1 <- df_cdf_1 |> pivot_longer(cols = c(`2022`:`2018`), names_to = "Academic Year", values_to = "num_students")
+ df_cdf_1 <- df_cdf_1 |> mutate(`Academic Year` = factor(`Academic Year`, levels = c("2018", "2019", "2020", "2021", "2022")))
+
+df_cdf_1$num_students <- as.numeric(df_cdf_1$num_students)
+
+ filtered_cdf <- df_cdf_1 |> group_by(School.Name) |> filter(all(num_students > 100))
+ filtered_cdf <- filtered_cdf |> mutate(academic_year_num = as.numeric(as.character(`Academic Year`)))
+ slopes <- filtered_cdf |> 
+  group_by(state_name) |> 
+  summarize(slope = coef(lm(num_students ~ academic_year_num))["academic_year_num"], average_students = mean(num_students)
+  ) |>
+  mutate(perc_chg_pr_yr = (slope / average_students) * 100)
+ggplot(filtered_cdf, aes(x = `Academic Year`, y = 'Number of Total Students')) + geom_point() + geom_smooth(method = "lm", aes(group=1), color = "red") + facet_wrap(~state_name) +  geom_text(data = slopes, aes(x = Inf, y = Inf, label = paste0("perc_chg_pr_yr: ", round(perc_chg_pr_yr, 2), "%")), 
+            hjust = 1.1, vjust = 1.1, size = 5, color = "red", position = position_nudge(y = -10))
+ 
+```
+```{r}
+model_data <- our_data_clean |>
+  mutate(`Grades 1-8 Students [Public School] 2022-23` = as.numeric(`Grades 1-8 Students [Public School] 2022-23`), 
+         `Grades 9-12 Students [Public School] 2022-23` = as.numeric(`Grades 9-12 Students [Public School] 2022-23`), 
+         `Asian or Asian/Pacific Islander Students [Public School] 2022-23` = as.numeric(
+           `Asian or Asian/Pacific Islander Students [Public School] 2022-23`),
+         `Asian or Asian/Pacific Islander Students [Public School] 2021-22` = as.numeric(
+           `Asian or Asian/Pacific Islander Students [Public School] 2021-22`),
+         `Asian or Asian/Pacific Islander Students [Public School] 2020-21` = as.numeric(
+           `Asian or Asian/Pacific Islander Students [Public School] 2020-21`),
+         `Asian or Asian/Pacific Islander Students [Public School] 2019-20` = as.numeric(
+           `Asian or Asian/Pacific Islander Students [Public School] 2019-20`),
+         `Asian or Asian/Pacific Islander Students [Public School] 2018-19` = as.numeric(
+           `Asian or Asian/Pacific Islander Students [Public School] 2018-19`)
+  ) |>
+  select(`School Name`, `State Name [Public School] Latest available year`,
+         `Asian or Asian/Pacific Islander Students [Public School] 2022-23`,
+         `Asian or Asian/Pacific Islander Students [Public School] 2021-22`,
+         `Asian or Asian/Pacific Islander Students [Public School] 2020-21`,
+         `Asian or Asian/Pacific Islander Students [Public School] 2019-20`,
+         `Asian or Asian/Pacific Islander Students [Public School] 2018-19`
+  ) |>
+  filter(`State Name [Public School] Latest available year` %in% c("Alaska", "Arkansas", "Delaware", "New Mexico", "Wisconsin"))
+
+# Modify the data processing to clean the year column properly
+model_data_long <- model_data |>
+  pivot_longer(
+    cols = starts_with("Asian or Asian/Pacific Islander Students"),
+    names_to = "Academic Year",
+    values_to = "Asian Students",
+    names_prefix = "Asian or Asian/Pacific Islander Students [Public School] "
+  ) |>
+  mutate(
+    `Academic Year` = as.numeric(gsub("[^0-9]", "", `Academic Year`))  # Remove non-numeric characters safely
+  )
+
+# Check for any NAs in the `Academic Year` column and remove them if necessary
+model_data_long <- model_data_long |>
+  filter(!is.na(`Academic Year`))
+
+# Plot the data
+ggplot(model_data_long, aes(x = `Academic Year`, y = `Asian Students`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  facet_wrap(~ `State Name [Public School] Latest available year`) +
+  labs(
+    title = "Linear Trend of Asian Student Population Over Time by State",
+    x = "Academic Year",
+    y = "Number of Asian Students"
+  ) +
+  scale_x_continuous(
+    breaks = c(2018, 2019, 2020, 2021, 2022),  # Specify the years you want to show
+    labels = c("2018", "2019", "2020", "2021", "2022")  # Custom labels (optional)
+  ) +
+  theme_minimal()
+
+
+
+```
+
