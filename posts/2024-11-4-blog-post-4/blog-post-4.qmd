@@ -101,11 +101,12 @@ ggplot(model_data_long, aes(x = `Academic Year`, y = `Asian Students`)) +
   theme_minimal()
 ```
 
-To build statistical models, we chose a Linear model to examine any overall linear trends in the enrollment of Asian students, in the top 5 states the demonstrated the highest percentage change in enrollment. From the plots, faceted by state, we observe that states like Delaware demonstrated the highest growth rate of Asian students. Whereas, states like New Mexico and Wisconsin showed almost no change. 
+To build statistical models, we chose a Linear model to examine any overall linear trends in the enrollment of Asian students, in the top 5 states that demonstrated the highest percentage change in enrollment. From the plots, faceted by state, we observe that states like Delaware demonstrated the highest growth rate of Asian students. Whereas, states like New Mexico and Wisconsin showed almost no change. 
 
 We plan to investigate why some states (like New Mexico that displayed a high growth rate in enrollment) does not reflect a high growth rate for demographics like Asian students, and whether we find a similar trend with other demographics.
 
 **Expanding the Dataset**
+
 As we look to expand our dataset, we plan to include additional categorical variables that could enhance our analysis. For example, by segmenting (or “faceting”) the data by public schools, we could incorporate the number of government-funded programs—such as free or reduced lunch and language support for non-native English speakers. Using linear modeling, we could then explore whether the number of students in these programs tends to increase in schools within districts with larger minority populations. Additionally, if we are able to acquire more data for private schools, we could compare program participation rates between public and private schools.
 
 Alternatively, by faceting the data by state, we could examine dropout rates broken down by race/ethnicity, gender, and grade level. This would allow us to model dropout trends over time, analyzing whether dropout rates change as students advance through their education. We could also investigate dropout patterns in economically disadvantaged districts and those with higher proportions of minority students, using logistic modeling to better understand these relationships. 
