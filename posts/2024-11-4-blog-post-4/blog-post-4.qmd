@@ -35,6 +35,10 @@ ggplot(filtered_cdf, aes(x = `Academic Year`, y = 'Number of Total Students')) +
             hjust = 1.1, vjust = 1.1, size = 5, color = "red", position = position_nudge(y = -10))
  
 ```
+From the plot above, we see the overall percentage change in enrollment of students from years 2018 to 2022, faceted by state. This provides an overall picture to compare enrollment growth rate over the years for different states. For instance, we see states like New Mexico with the highest growth rate of 14.99%, compared to New York and Virginia that had growth rates of -0.1% and -0.35% respectively. This gives an opportunity to further investigate why some states have extremely high or low enrollment growth rates, and if this reflects growth rates of certain demographics as well.
+
+In the plot below, we have considered 5 states with the largest absolute growth rates in enrollment from 2018 to 2022.
+
 ```{r}
 model_data <- our_data_clean |>
   mutate(`Grades 1-8 Students [Public School] 2022-23` = as.numeric(`Grades 1-8 Students [Public School] 2022-23`), 
@@ -94,4 +98,6 @@ ggplot(model_data_long, aes(x = `Academic Year`, y = `Asian Students`)) +
 
 
 ```
+To build statistical models, we chose a Linear model to examine any overall linear trends in the enrollment of Asian students, in the top 5 states the demonstrated the highest percentage change in enrollment. From the plots, faceted by state, we observe that states like Delaware demonstrated the highest growth rate of Asian students. Whereas, states like New Mexico and Wisconsin showed almost no change. 
 
+We plan to investigate why some states (like New Mexico that displayed a high growth rate in enrollment) does not reflect a high growth rate for demographics like Asian students, and whether we find a similar trend with other demographics.
