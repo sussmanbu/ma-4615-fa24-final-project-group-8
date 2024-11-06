@@ -127,8 +127,7 @@ suppressWarnings(
 Currently, we are only looking at the one ELSI data file, but we plan to 
 incorporate more as we progress in our project timeline for auxiliary analyses. 
 
-The following variables are currently included in our dataset: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,    American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important 
-contributing factors to school enrollment. Race/Ethnicity can reflect cultural 
+The following variables are currently included in our dataset: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important contributing factors to school enrollment. Race/Ethnicity can reflect cultural 
 differences and disparities in access to resources in segregated communities, 
 thus it is important to analyze how systemic issues affect enrollment and cross
 reference grade as well to compare effects. Gender can also have a significant 
@@ -178,3 +177,4 @@ This restructured dataset, segmented by academic year, grade, gender, and race,
 will allow us to uncover patterns and generate insights into the various 
 influences on school enrollment and attendance, supporting a comprehensive 
 analysis of educational trends and their underlying factors.
+
