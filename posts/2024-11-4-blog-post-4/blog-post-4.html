@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker.">
-<meta name="dcterms.date" content="2024-10-28">
+<meta name="dcterms.date" content="2024-11-04">
 
-<title>Blog Post 3 – MA [46]15 Final Project</title>
+<title>Blog Post 4 – MA [46]15 Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -151,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Blog Post 3</h1>
+      <h1 class="title">Blog Post 4</h1>
                       </div>
   </div>
     
@@ -168,14 +168,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 28, 2024</p>
+        <p class="date">November 4, 2024</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 28, 2024</p>
+        <p class="date-modified">November 4, 2024</p>
       </div>
     </div>
       
@@ -193,16 +193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><strong>Data Cleaning</strong></p>
-<p>During initial data cleaning, we identified negative values in student number columns, which we removed along with entries marked with symbols (e.g., ‘-’, ‘†’, ‘‡’) for missing or inapplicable data. Moving forward, we plan to restructure the data to address our primary research questions from Blog Post 1, including creating tables sorted by academic year, grade, and gender.</p>
-<p>We also found inconsistencies in state name formatting—some, like Texas, were fully capitalized, leading to them being treated as distinct entities. To resolve this, we plotted a bar chart of public schools by state to verify these discrepancies. After confirming this issue, we used the mutate function to standardize state names, capitalizing the first letter (e.g., converting TEXAS to Texas) to unify them.</p>
-<p>Additionally, while cleaning for missing values, we observed that rows with excessive N/A values were being removed, which inadvertently led to the loss of many state names and potential bias in our analysis.</p>
-<p>In the future, to avoid warnings, we will also ensure that all columns have appropriate data types.</p>
-<p><strong>Preliminary Data Analysis</strong></p>
-<p>To explore primary insights that our dataset could provide, we plotted a bar chart with the number of schools in each state.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -220,10 +212,10 @@ Attaching package: 'dplyr'</code></pre>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ forcats   1.0.0     ✔ readr     2.1.5
+✔ ggplot2   3.5.1     ✔ stringr   1.5.1
 ✔ lubridate 1.9.3     ✔ tibble    3.2.1
-✔ purrr     1.0.2     ✔ tidyr     1.3.1
-✔ readr     2.1.5     </code></pre>
+✔ purrr     1.0.2     ✔ tidyr     1.3.1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -231,80 +223,115 @@ Attaching package: 'dplyr'</code></pre>
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>our_data_clean <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/our_data_clean.rds"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>our_data_clean <span class="ot">&lt;-</span> our_data_clean <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_all</span>(<span class="fu">all_vars</span>(<span class="fu">as.numeric</span>(.) <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">|</span> <span class="fu">is.na</span>(<span class="fu">as.numeric</span>(.)))) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_to_title</span>(<span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">School Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>), as.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>our_data_clean <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/our_data_clean.rds"</span>)))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>clean_data_format_1 <span class="ot">&lt;-</span> our_data_clean <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="st">`</span><span class="at">School Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>,<span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2022-23</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2018-19</span><span class="st">`</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df_cdf_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(clean_data_format_1)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"state_name"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"2022"</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">"2021"</span>  </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"2020"</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="st">"2019"</span>  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_cdf_1)[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="st">"2018"</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a> df_cdf_1 <span class="ot">&lt;-</span> df_cdf_1 <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>), <span class="at">names_to =</span> <span class="st">"Academic Year"</span>, <span class="at">values_to =</span> <span class="st">"num_students"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a> df_cdf_1 <span class="ot">&lt;-</span> df_cdf_1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>)))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>df_cdf_1<span class="sc">$</span>num_students <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_cdf_1<span class="sc">$</span>num_students)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a> filtered_cdf <span class="ot">&lt;-</span> df_cdf_1 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(School.Name) <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">all</span>(num_students <span class="sc">&gt;</span> <span class="dv">100</span>))</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a> filtered_cdf <span class="ot">&lt;-</span> filtered_cdf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">academic_year_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>)))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a> slopes <span class="ot">&lt;-</span> filtered_cdf <span class="sc">|&gt;</span> </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state_name) <span class="sc">|&gt;</span> </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">slope =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(num_students <span class="sc">~</span> academic_year_num))[<span class="st">"academic_year_num"</span>], <span class="at">average_students =</span> <span class="fu">mean</span>(num_students)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_chg_pr_yr =</span> (slope <span class="sc">/</span> average_students) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(filtered_cdf, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">'Number of Total Students'</span>)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>state_name) <span class="sc">+</span>  <span class="fu">geom_text</span>(<span class="at">data =</span> slopes, <span class="fu">aes</span>(<span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"perc_chg_pr_yr: "</span>, <span class="fu">round</span>(perc_chg_pr_yr, <span class="dv">2</span>), <span class="st">"%"</span>)), </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">vjust =</span> <span class="fl">1.1</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">y =</span> <span class="sc">-</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: There were 4 warnings in `filter()`.
-The first warning was:
-ℹ In argument: `&amp;...`.
-Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`School Name`)) ``:
-! NAs introduced by coercion
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.</code></pre>
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>our_data_clean <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number Of Public Schools In Each State"</span>, <span class="at">x =</span> <span class="st">"State"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="blog-post-3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="blog-post-4_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>From the chart, we see states like Texas having the highest number of public schools. This is followed by Michigan, Florida and Alaska. On the other hand, states like Rhode Island, North Dakota and Indiana, have the lowest number of public schools.</p>
-<p><strong>Outlier Analysis</strong></p>
-<p>We selected five states to analyze potential outliers in school student numbers.</p>
+<p>From the plot above, we see the overall percentage change in enrollment of students from years 2018 to 2022, faceted by state. This provides an overall picture to compare enrollment growth rate over the years for different states. For instance, we see states like New Mexico with the highest growth rate of 14.99%, compared to New York and Virginia that had growth rates of -0.1% and -0.35% respectively. This gives an opportunity to further investigate why some states have extremely high or low enrollment growth rates, and if this reflects growth rates of certain demographics as well.</p>
+<p>In the plot below, we have considered 5 states with the largest absolute growth rates in enrollment from 2018 to 2022.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting states to plots</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>unique_states <span class="ot">=</span> <span class="fu">unique</span>(our_data_clean<span class="sc">$</span><span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>selected_states <span class="ot">&lt;-</span> our_data_clean[our_data_clean<span class="sc">$</span><span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span> <span class="sc">%in%</span> unique_states[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>], ]</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Outlier Analysis </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selected_states, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>, </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> <span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2022-23</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Total Grade 1-8 Students by State in 2022-23"</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"States"</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count of Students"</span>) <span class="sc">+</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="co"># Rotate x-axis labels to vertical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> our_data_clean <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2022-23</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2022-23</span><span class="st">`</span>), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Grades 9-12 Students [Public School] 2022-23</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Grades 9-12 Students [Public School] 2022-23</span><span class="st">`</span>), </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2022-23</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2022-23</span><span class="st">`</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2021-22</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2021-22</span><span class="st">`</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2020-21</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2020-21</span><span class="st">`</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2019-20</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2019-20</span><span class="st">`</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2018-19</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2018-19</span><span class="st">`</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">School Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2022-23</span><span class="st">`</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2021-22</span><span class="st">`</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2020-21</span><span class="st">`</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2019-20</span><span class="st">`</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2018-19</span><span class="st">`</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Alaska"</span>, <span class="st">"Arkansas"</span>, <span class="st">"Delaware"</span>, <span class="st">"New Mexico"</span>, <span class="st">"Wisconsin"</span>))</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the data processing to clean the year column properly</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>model_data_long <span class="ot">&lt;-</span> model_data <span class="sc">|&gt;</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Asian or Asian/Pacific Islander Students"</span>),</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Academic Year"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Asian Students"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"Asian or Asian/Pacific Islander Students [Public School] "</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"[^0-9]"</span>, <span class="st">""</span>, <span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>))  <span class="co"># Remove non-numeric characters safely</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for any NAs in the `Academic Year` column and remove them if necessary</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>model_data_long <span class="ot">&lt;-</span> model_data_long <span class="sc">|&gt;</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>))</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(model_data_long, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Academic Year</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Asian Students</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>) <span class="sc">+</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Linear Trend of Asian Student Population Over Time by State"</span>,</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Academic Year"</span>,</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Asian Students"</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>),  <span class="co"># Specify the years you want to show</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>)  <span class="co"># Custom labels (optional)</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="blog-post-3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="blog-post-4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The graph indicates that Pennsylvania has significant outliers, with one school reporting over 10,000 Grade 1-8 students. We also see the spread of outliers being the greatest for Pennsylvania schools. Moreover, one can observe that the interquartile range for states differ. For example, Colorado has the biggest interquartile range, showing that the middle half of the data, for the number of students in Colorado schools, is spread out. On the other hand, Minnesota has a seemingly lower IQR.</p>
-<p><strong>Investigating potential relations between Variables</strong></p>
-<p>We wanted to investigate if we found any correlation between our variables. For our preliminary check, we investigated a potential relationship between number of male and female students enrolled in public schools from 2022-23.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(our_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Male Students [Public School] 2022-23</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Male Students [Public School] 2022-23</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Male vs. Female Students 2022-23"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of Male Students"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Female Students"</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="blog-post-3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As we see from the graph below, there exists a strong linear correlation between the Male and Female students, possibly suggesting evidence of multicollinearity exisiting between the two.</p>
+<p>To build statistical models, we chose a Linear model to examine any overall linear trends in the enrollment of Asian students, in the top 5 states the demonstrated the highest percentage change in enrollment. From the plots, faceted by state, we observe that states like Delaware demonstrated the highest growth rate of Asian students. Whereas, states like New Mexico and Wisconsin showed almost no change.</p>
+<p>We plan to investigate why some states (like New Mexico that displayed a high growth rate in enrollment) does not reflect a high growth rate for demographics like Asian students, and whether we find a similar trend with other demographics.</p>
 
 
 
