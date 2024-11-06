@@ -8,8 +8,12 @@ draft: FALSE
 
 ```{r}
 library(dplyr)
-library(tidyr)
+library(tidyverse)
 library(ggplot2)
+
+suppressWarnings(
+our_data_clean <- read_rds(here::here("dataset/our_data_clean.rds")))
+
 clean_data_format_1 <- our_data_clean |> select(`School Name`, `State Name [Public School] Latest available year`,`Grades 1-8 Students [Public School] 2022-23`:`Grades 1-8 Students [Public School] 2018-19`)
 
 df_cdf_1 <- data.frame(clean_data_format_1)
