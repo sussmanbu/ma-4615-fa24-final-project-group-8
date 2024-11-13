@@ -25,4 +25,4 @@ new_data_clean <- new_data |>
   mutate(`State Name [Public School] Latest available year` = str_to_title(`State Name [Public School] Latest available year`))
 
 # Save the cleaned data as an .rds file
-write_rds(new_data_clean, file = here::here("dataset", "our_data_clean.rds"))
+write_rds(new_data_clean, file = here::here("dataset", "new_data_clean.rds"))
