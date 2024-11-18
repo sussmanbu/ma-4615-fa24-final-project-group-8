@@ -44,3 +44,31 @@ Ria is an undergraduate senior studying Mathematics. Her interests include bikin
 ### About this Template.
 
 This is based off of the standard Quarto website template from RStudio (2023.09.0 Build 463).
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+clean_data_format_elem2high <- our_data_clean |> select(`School Name`, `State Name [Public School] Latest available year`, `Grades 1-8 Students [Public School] 2018-19`,`Grades 9-12 Students [Public School] 2022-23`)
+
+df_cdf_e2h <- data.frame(clean_data_format_elem2high)
+names(df_cdf_e2h)[2] <- "state_name"
+names(df_cdf_e2h)[3] <- "1" 
+names(df_cdf_e2h)[4] <- "2"  
+ df_cdf_e2h <- df_cdf_e2h |> pivot_longer(cols = c(`1`:`2`), names_to = "division", values_to = "num_students")
+
+df_cdf_e2h$num_students <- as.numeric(df_cdf_e2h$num_students)
+
+ filtered_cdf_e2h <- df_cdf_e2h |> group_by(School.Name) |> filter(all(num_students > 100))
+ filtered_cdf_e2h <- filtered_cdf_e2h |> mutate(division_num = as.numeric(as.character(division)))
+ slopes <- filtered_cdf_e2h |> 
+  group_by(state_name) |> 
+  summarize(slope = coef(lm(num_students ~ division_num))["division_num"], average_students = mean(num_students)
+  ) |>
+  mutate(perc_chg = (slope / average_students) * 100)
+ggplot(filtered_cdf_e2h, aes(x = division_num, y = num_students)) + geom_point() + geom_smooth(method = "lm", aes(group=1), color = "red") + facet_wrap(~state_name) +  geom_text(data = slopes, aes(x = Inf, y = Inf, label = paste0("perc_chg: ", round(perc_chg, 2), "%")), 
+            hjust = 1.1, vjust = 1.1, size = 3, color = "red", position = position_nudge(y = -10))
+ 
+```
+
+
