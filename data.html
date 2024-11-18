@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="We describe the sources of our data and the cleaning process.">
 
-<title>Data – MA [46]15 Final Project</title>
+<title>MA [46]15 Final Project - Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For small datasets (&lt;50mb), you can use the <code>dataset</code> folder that is tracked by github. Add the files just like you would any other file.</p>
 <p>If you create a folder named <code>data</code> this will cause problems.</p>
 <p>For larger datasets, you’ll need to create a new folder in the project root directory named <code>dataset-ignore</code>. This will be ignored by git (based off the <code>.gitignore</code> file in the project root directory) which will help you avoid issues with Github’s size limits. Your team will have to manually make sure the data files in <code>dataset-ignore</code> are synced across team members.</p>
-<p>Your <a href="./scripts/load_and_clean_data.R">load_and_clean_data.R</a> file is how you will load and clean your data. Here is a an example of a very simple one.</p>
+<p>Your <a href=".\scripts/load_and_clean_data.R">load_and_clean_data.R</a> file is how you will load and clean your data. Here is a an example of a very simple one.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/load_and_clean_data.R"</span>,</span>
@@ -273,7 +273,7 @@ dbl (4): min, white, himin, hiwhite
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span> <span class="co"># Use echo=FALSE or omit it to avoid code output  </span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/richardpilleul/Documents/Boston University/Fall 24/CAS MA 415/HW3/ma-4615-fa24-final-project-group-8</code></pre>
+<pre><code>here() starts at C:/Users/jfmsu/Downloads/Data science in R/ma-4615-fa24-final-project-group-8</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
@@ -298,10 +298,46 @@ The first warning was:
 ℹ In argument: `&amp;...`.
 Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`School Name`)) ``:
 ! NAs introduced by coercion
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.</code></pre>
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.
+One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 104698 Columns: 57
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (57): School Name, State Name [Public School] Latest available year, Gra...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 104698 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (67): School Name, State Name [Public School] Latest available year, Gra...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 14 warnings in `filter()`.
+The first warning was:
+ℹ In argument: `&amp;...`.
+Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`School Name`)) ``:
+! NAs introduced by coercion
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 13 remaining warnings.</code></pre>
 </div>
 </div>
-<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> which appears as <a href="./scripts/load_and_clean_data.R">cleaning script</a>.</p>
+<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> which appears as <a href=".\scripts/load_and_clean_data.R">cleaning script</a>.</p>
 <hr>
 </section>
 </section>
@@ -339,14 +375,28 @@ Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`Sc
 <p>The data (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of Education Statistics, a federal agency appointed to serve the U.S. department of education. The data is collected using two primary surveys: The Common Core of Data (CCD) and the Private School Survey (PSS). The data from these two surveys come from a collection of other sources; primarily the state dropout and completion data file, and Local Education Agency Universal Survey. Finance data was also utilized for certain variables. The Institute of Education Sciences collected the data to analyze “education trends”, to further initiatives to improve access to higher education. Finding the data from the original source is possible but tedious, as data is collected by state and locally.</p>
 <p>In our <code>clean_data.R</code> file, the code snippet utilizes the <code>tidyverse</code> package to handle data manipulation and analysis tasks efficiently. It reads in a RData file named <code>clean_data.R</code> located within the <code>datasets</code> directory using the <code>load()</code> function. The cleaned data is saved as an <code>.rds</code> file named <code>our_data_clean.rds</code> in the <code>scripts</code> directory using the <code>saveRDS</code> function. This ensures that the cleaned data set can be easily accessed and shared for future analyses. Additionally, the <code>readRDS</code> function is used to read the saved <code>.rds</code> file, enabling the retrieval of the cleaned data set for further processing or exploration.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"scripts/clean_data.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"scripts/clean_data.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 104698 Columns: 57
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (57): School Name, State Name [Public School] Latest available year, Gra...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 104698 Columns: 57
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (57): School Name, State Name [Public School] Latest available year, Gra...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 104698 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (67): School Name, State Name [Public School] Latest available year, Gra...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -366,6 +416,16 @@ Moreover, some standardization of state names was done to ensure that we were no
 impacted by significant events like COVID-19. For instance, research suggests the pandemic increased “social avoidance,” particularly among male students, leading to decreased motivation for school attendance due to diminished social interaction. Among younger students, parental choices rooted in safety habits established during the pandemic may also contribute to attendance shifts. By segmenting attendance data by grade over academic years, we can better understand these nuances.</p>
 <p>Gender and Race - Our data enables us to explore how systemic issues affect enrollment patterns. Given the historical context of redlining and segregation in the U.S., students of certain racial backgrounds are more likely to reside in resource-limited areas, impacting their educational opportunities. Analyzing enrollment by race and gender can illuminate the ways these structural factors shape enrollment trends in public schools, providing insights into broader social inequities.</p>
 <p>This restructured dataset, segmented by academic year, grade, gender, and race, will allow us to uncover patterns and generate insights into the various influences on school enrollment and attendance, supporting a comprehensive analysis of educational trends and their underlying factors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>new_data_clean <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"C:/Users/jfmsu/Downloads/Data science in R/ma-4615-fa24-final-project-group-8/dataset/new_data_clean.rds"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>df_ndc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(new_data_clean)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>new_data_cleann <span class="ot">&lt;-</span> new_data_clean <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">Grades 1-8 Students [Public School] 2022-23</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2020-21</span><span class="st">`</span>), as.numeric)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"19-20"</span>), <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">State Name [Public School] Latest available year</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Male Students [Public School] 2019-20</span><span class="st">`</span>, <span class="st">`</span><span class="at">Female Students [Public School] 2019-20</span><span class="st">`</span>), <span class="at">.by =</span> <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop_white =</span> <span class="st">`</span><span class="at">White Students [Public School] 2019-20</span><span class="st">`</span><span class="sc">/</span>total, <span class="at">.by =</span> <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop_Black =</span> <span class="st">`</span><span class="at">Black or African American Students [Public School] 2019-20</span><span class="st">`</span><span class="sc">/</span>total, <span class="at">.by =</span> <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop_Asian =</span> <span class="st">`</span><span class="at">Asian or Asian/Pacific Islander Students [Public School] 2019-20</span><span class="st">`</span><span class="sc">/</span>total, <span class="at">.by =</span> <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop_hisp =</span> <span class="st">`</span><span class="at">Hispanic Students [Public School] 2019-20</span><span class="st">`</span><span class="sc">/</span>total, <span class="at">.by =</span> <span class="st">`</span><span class="at">School Name</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
@@ -406,7 +466,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -438,29 +509,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/ma-4615-fa24-final-project-group-8\/");
@@ -468,7 +517,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
