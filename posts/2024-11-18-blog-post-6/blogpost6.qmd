@@ -1,0 +1,17 @@
+---
+title: "Blog Post 6"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-11-18"
+date-modified: "2024-11-18"
+draft: FALSE
+---
+Limitations of crossing data/our solution: As stated in blog post 5, there are different methods of collecting race data between tidy census and our school dataset. Tidycensus treats “Hispanic/Latino” as an ethnicity–thus a separate category. While our school enrollment dataset treats Hispanic as a race (like Black, White, Asian, etc). We decided the best method around this was to look at the 2nd category in the census, and create a new category of Hispanics. Then shape the remaining categories proportionally to the remaining population. This obviously would not be a perfect representation but it would still keep general proportions. 
+
+Racial Breakdown Of Hispanic Americans According to USA FACTS The Hispanic population has quadrupled in the past four decades. It is also becoming more diverse.  
+65.6% White 
+25.7% some other race alone 
+5.0% multiracial
+2.3% Black or African American 
+1.0% American Indian/Alaska Native 
+0.3% Asian 
+0.1% Hawaiian/pacific islander 
