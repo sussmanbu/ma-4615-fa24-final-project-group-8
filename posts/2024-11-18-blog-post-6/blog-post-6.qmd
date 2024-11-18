@@ -15,3 +15,16 @@ Racial Breakdown Of Hispanic Americans According to USA FACTS The Hispanic popul
 1.0% American Indian/Alaska Native 
 0.3% Asian 
 0.1% Hawaiian/pacific islander 
+
+Public VS Private Analysis. 
+Once our Dataset containing proportions of under 18 racial data from each state using tidy census is finalized, our goal is to also utilize the Private School data given in the original dataset. We will cross reference public school data with Private School data to see if racial proportion differences between public school enrollment and under 18 data can be explained by larger proportions of certain races choosing to attend private school instead of public.  
+To work towards this goal, we created a new dataset containing race proportions for each school using 2019-20 enrollment data; the private school data only contains sporadic years, and 2019-20 is the only one that both public and private had data for. However, given that there does not appear to be significant change in data from year to year (very strong autocorrelation), we believe that this will still allow us to make a strong conclusion. 
+Code for calculating proportions for each race for 2019-20 
+
+Library(dplyr)
+new_data_clean <- readRDS("C:/Users/jfmsu/Downloads/Data science in R/ma-4615-fa24-final-project-group-8/dataset/new_data_clean.rds")
+df_ndc <- data.frame(new_data_clean)
+
+new_data_cleann <- new_data_clean |> mutate(across(c(`Grades 1-8 Students [Public School] 2022-23`:`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2020-21`), as.numeric)) |> select(matches("19-20"), `School Name`, `State Name [Public School] Latest available year`) |> mutate(total = sum(`Male Students [Public School] 2019-20`, `Female Students [Public School] 2019-20`), .by = `School Name`) |> mutate(prop_white = `White Students [Public School] 2019-20`/total, .by = `School Name`) |> mutate(prop_Black = `Black or African American Students [Public School] 2019-20`/total, .by = `School Name`) |> mutate(prop_Asian = `Asian or Asian/Pacific Islander Students [Public School] 2019-20`/total, .by = `School Name`) |> mutate(prop_hisp = `Hispanic Students [Public School] 2019-20`/total, .by = `School Name`)
+
+This dataset contains all columns containing 2019-20, and the first two character columns. For this purpose we just looked at totals; calculated by summing male and female students for each respective school. We decided to only look at White, Black, Asian and Hispanic as proportion categories. 
