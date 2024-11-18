@@ -1,0 +1,21 @@
+---
+title: "Blog Post 5"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-11-11"
+date-modified: "2024-11-11"
+draft: FALSE
+---
+
+**Merging Data Process**
+
+We are in the process of creating a dataset on racial breakdowns of minor (under 18) populations by state. We are creating this dataset by utilizing the tidy census package to extract race data by age. More specifically, we utilized the “sex by age” concept in tidy census, which contains race counts for each sex and each age group. One current limitation is that the data in the tidy census treats hispanic not as a race, but as a separately applicable category. We plan to get around this by excluding those of hispanic origin from the other three categories. After we have done this and have a final data table, our plan is to cross reference with the race data of school enrollment statewide, to see which races are over/under represented in school enrollment, and how it differs by state. 
+
+**How To Use Merged Data**
+
+The data that we currently have is related to the racial breakdown in public schools by state. However, we would like to bring together multiple datasets to enable a more in depth analysis. We would like to further explore how race has an effect on offerings in public schools - specifically special aid programs such as reduced lunch and free lunch. 
+
+From the same website, we are also exploring categorical data regarding school type (regular or special education school), lowest and highest grades offered by the schools, and numerical data of the number of full time teachers, pupil/teacher ratio. These variables can be used to examine any patterns with the racial demographics of the students enrolled in the school. Variables such as pupil/teacher ratio, that can be faceted by racial demographics, could also be used to investigate any correlation to the dropout rates. 
+
+Because the data is coming from the same source, we have found a column to perform a join on - ‘School Name’. As this is a common column between the 2 datasets, we should be able to effectively combine information from the old and new data to create a comprehensive file detailing racial breakdown, enrollments, pupil:teacher ratios, and participants in aid programs. If we find that a join is not necessary, we may refer back to the original database and extend the columns of our original dataset.
+
+After extending the columns of our original dataset and successfully merging it with the tidycensus data, we aim to analyze how the demographic composition of the under-18 population in a given area correlates with the characteristics of surrounding public schools. Specifically, we will explore questions such as: Do these schools offer more government-assisted programs? Are their dropout rates higher? Do areas with certain demographic profiles have a greater number of private schools? Through this analysis, we hope to gain deeper insights into the socioeconomic conditions of these schools and better understand how these factors might influence the quality of education provided.
