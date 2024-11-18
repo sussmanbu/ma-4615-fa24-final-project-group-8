@@ -20,3 +20,7 @@ Links to referred studies: https://escholarship.org/uc/item/6wx120pt, https://er
 
 **Data for Equity**
 The article mentions three key principles related to data practice: Beneficence, Respect for persons, and Justice. Beneficence plays a key role in our project, as we want to ensure our analysis and conclusions are insightful and that they do not harm any communities. One way we can do this is to be transparent about any limitations in the data and in our analysis. For example, instead of making unsupported conclusions that may harm the reputation of a particular group of people, we have to acknowledge the limitations of the data set and analysis. Not being transparent may also lead to potential misuse of the data or our results which can further harm certain communities. Respect for persons is another principle that is important to keep in mind when working with data. If we were the ones collecting data, it is crucial that the collection process includes informed consent, consideration for all groups of people, and respecting the privacy and personal details of the respondents. In relation to the public school enrollment data set, we could maintain this principle by ensuring the data we work with and the results of our project respect the privacy of the individuals. It is assumed that the data sets do not include any sensitive personal information but if that is not the case, it is something that can be dealt with in the cleaning phase and something to keep in mind when reporting our findings.  
+
+
+
+
