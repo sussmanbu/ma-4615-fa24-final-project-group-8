@@ -26,3 +26,14 @@ new_data_clean <- new_data |>
 
 # Save the cleaned data as an .rds file
 write_rds(new_data_clean, file = here::here("dataset", "new_data_clean.rds"))
+
+df_ndc <- data.frame(new_data_clean)
+
+new_data_cleann <- new_data_clean |> 
+  mutate(across(c(`Grades 1-8 Students [Public School] 2022-23`:`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2020-21`), as.numeric)) |> 
+  select(matches("19-20"), `School Name`, `State Name [Public School] Latest available year`) |> 
+  mutate(total = sum(`Male Students [Public School] 2019-20`, `Female Students [Public School] 2019-20`), .by = `School Name`) |> 
+  mutate(prop_white = `White Students [Public School] 2019-20`/total, .by = `School Name`) |> 
+  mutate(prop_Black = `Black or African American Students [Public School] 2019-20`/total, .by = `School Name`) |> 
+  mutate(prop_Asian = `Asian or Asian/Pacific Islander Students [Public School] 2019-20`/total, .by = `School Name`) |> 
+  mutate(prop_hisp = `Hispanic Students [Public School] 2019-20`/total, .by = `School Name`)
