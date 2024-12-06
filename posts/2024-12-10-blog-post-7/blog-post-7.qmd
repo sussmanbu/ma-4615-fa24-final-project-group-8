@@ -1,0 +1,40 @@
+---
+title: "Blog Post 7"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-12-10"
+date-modified: "2024-12-15"
+draft: FALSE
+---
+
+# Exploratory Data Analysis (EDA)
+
+## Overview
+
+How are you continuing your exploratory data analysis? Make sure you’ve done a thorough exploration for your project. Although many ideas may lead to dead ends, keep looking for patterns and think about attaching more data when necessary.
+
+We started by exploring the dependency on aid programs in public schools relative to the minority populations in those areas. Initially, we focused on identifying states and schools with the highest minority populations. However, we encountered a limitation: some schools with minimal data had a student body population consisting entirely of minority students. As a result, we decided to shift focus to the top 10 largest states rather than individual schools.
+
+This change will allow us to compare our initial dataset with a larger, more representative sample by analyzing data from the Census Bureau's geographic data, which provides racial breakdowns by state. With this dataset, we can better understand how our initial school-level data compares to state-level data.
+
+For example, we can compare racial breakdowns in schools by state with the general population in those states. If discrepancies arise, we might explore which counties contribute to these differences.
+
+## Dataset Comparison
+
+We have started to analyze the second dataset, which comes from the U.S. Census Bureau. Below is the **final difference table** that compares school enrollment data to census data.
+
+A positive value indicates that the census data reflects a lesser proportion of a specific race than the school enrollment data does. In other words, a positive value suggests that public school enrollment over-represents that race. Conversely, a negative value indicates underrepresentation.
+
+```{r}
+# Example table: You will need to replace this with actual data.
+diff_table <- data.frame(
+  State = c("California", "Florida", "Texas", "Georgia"),
+  White_Proportion = c(0.07, -0.004, 0.0003, -0.015),
+  Description = c(
+    "Over-represented by 7% in public schools",
+    "Nearly perfectly represented in public schools",
+    "Very close to the correct representation",
+    "Under-represented by 1.5% in public schools"
+  )
+)
+
+diff_table
