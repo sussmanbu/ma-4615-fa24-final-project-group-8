@@ -1,0 +1,52 @@
+---
+title: "Blog Post 7"
+author: "Riya Parikh, Richard Pilleul, Jakob Moskowitz, Maika Takemoto, Ria Sonalker."
+date: "2024-12-10"
+date-modified: "2024-12-5"
+draft: FALSE
+---
+
+**How are you continuing your exploratory data analysis?**
+
+We started by exploring the dependency on aid programs in public schools relative to the minority populations in those areas. Initially, we focused on identifying states and schools with the highest minority populations. However, we encountered a limitation: some schools with minimal data had a student body population consisting entirely of minority students. As a result, we decided to shift focus to the top 10 largest states rather than individual schools.
+
+![Final Difference Table](minority_level.jpg)
+
+This way, we will be able to compare analysis done between our initial data set and the second dataset using a larger sample that is more representative of the surrounding population. The latter dataset, sourced from the geo census, incorporates racial breakdowns by state, and having this data will enable us to rationalize the values that we got from our initial analysis. For example, we will be able to compare how our racial breakdown in schools by state differs from the state in general. If there is a difference, we may want to further analyze which counties these differences come from. 
+
+Additionally, we have started doing some initial analysis using our second dataset. See our final difference table below:
+
+![Final Difference Table](Difference_Table.jpg)
+
+A Positive value means the 0-17 census data reflects a lesser proportion of this race than the school enrollment data does. Thus, a positive value means public school enrollment over represents such race. A negative value means such race is underrepresented in public school enrollment. 
+
+Here is an analysis of some of the largest states’ White population.
+
+California: 0.07 (7%) 
+
+California’s public school enrollment appears to over-represent White children by 7 percent. This could be because of a few factors. California has a very large Mexican immigrant population. It is possible that fewer immigrants are enrolling in public schools because of concerns about legal status/deportation. This is a hypothesis but there are likely many factors.
+
+Florida: -0.004 (0.04%) 
+
+Florida’s result difference for White population is extremely close to zero, which indicates whites are nearly perfectly represented in school enrollment. 
+
+Texas: 0.0003 (0.003%) 
+
+Texas’s result difference for White population is also very close to zero. 
+
+Georgia: -0.015 (1.5%) 
+
+White children appear to be slightly underrepresented in Georgia public schools. In contrast with California, GA has a large Black/African American population. Due to structural racism/factors, the median income of White families in GA is 51 percent higher than the median income of Black families in GA. Thus, it is possible that more White families can afford to send their kids to private school, thus creating this underrepresentation. 
+
+**Thesis:** There is an increased dependency on aid programs in states with larger populations of minority groups such as African Americans, Hispanics, etc.
+
+We plan to:
+
+- Examine how minority groups navigate the school system and how their academic performance compares to other groups.
+- Compare the initial dataset vs. the merged dataset to see how patterns differ (if at all).
+- Investigate regional or county-level differences in minority representation.
+
+
+**Visualizations and Tables**
+
+We will want to ensure that the color scheme we have used for all of our plots is the same, and if possible, representative of what we are trying to show. We may try to have the same race represented by the same color throughout our project so that it is easiest for viewers to track how that population has changed over time. This, in addition to legends and proper labels, will be quite helpful. Additionally, we want to make sure that we have appropriate chart labels across all of our visualizations - this includes titles, axis labels, etc. Lastly, it’ll be of utmost importance that we select the appropriate graphs for each of the things we want to visualize. We should double check our work to make sure that we are not using visualization types that aren’t appropriate (ex: a linear model for a categorical variable). During this process, we should also make sure that all our visualizations are readable and interpretable.
