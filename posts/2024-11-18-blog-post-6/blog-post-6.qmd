@@ -5,7 +5,7 @@ date: "2024-11-18"
 date-modified: "2024-11-18"
 draft: FALSE
 ---
-Limitations of crossing data/our solution: As stated in blog post 5, there are different methods of collecting race data between tidy census and our school dataset. Tidycensus treats “Hispanic/Latino” as an ethnicity–thus a separate category. While our school enrollment dataset treats Hispanic as a race (like Black, White, Asian, etc). We decided the best method around this was to look at the 2nd category in the census, and create a new category of Hispanics. Then shape the remaining categories proportionally to the remaining population. This obviously would not be a perfect representation but it would still keep general proportions. 
+Limitations of crossing data/our solution: As stated in Blog Post 5, there are different methods of collecting race data between tidy census and our school dataset. Tidycensus treats “Hispanic/Latino” as an ethnicity–thus a separate category. While our school enrollment dataset treats Hispanic as a race (like Black, White, Asian, etc). We decided the best method around this was to look at the 2nd category in the census, and create a new category of Hispanics. Then, shape the remaining categories proportionally to the remaining population. This obviously would not be a perfect representation but it would still keep general proportions. 
 
 Racial Breakdown Of Hispanic Americans According to USA FACTS The Hispanic population has quadrupled in the past four decades. It is also becoming more diverse.  
 65.6% White 
@@ -17,9 +17,10 @@ Racial Breakdown Of Hispanic Americans According to USA FACTS The Hispanic popul
 0.1% Hawaiian/pacific islander 
 
 Public VS Private Analysis. 
-Once our Dataset containing proportions of under 18 racial data from each state using tidy census is finalized, our goal is to also utilize the Private School data given in the original dataset. We will cross reference public school data with Private School data to see if racial proportion differences between public school enrollment and under 18 data can be explained by larger proportions of certain races choosing to attend private school instead of public.  
+Once our dataset containing proportions of under 18 racial data from each state using tidy census is finalized, our goal is to also utilize the Private School data given in the original dataset. We will cross reference public school data with Private School data to see if racial proportion differences between public school enrollment and under 18 data can be explained by larger proportions of certain races choosing to attend private school instead of public.  
 To work towards this goal, we created a new dataset containing race proportions for each school using 2019-20 enrollment data; the private school data only contains sporadic years, and 2019-20 is the only one that both public and private had data for. However, given that there does not appear to be significant change in data from year to year (very strong autocorrelation), we believe that this will still allow us to make a strong conclusion. 
-Code for calculating proportions for each race for 2019-20 
+
+## Code for calculating proportions for each race for 2019-20 
 
 Library(dplyr)
 new_data_clean <- readRDS("C:/Users/jfmsu/Downloads/Data science in R/ma-4615-fa24-final-project-group-8/dataset/new_data_clean.rds")
