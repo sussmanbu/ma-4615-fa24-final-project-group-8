@@ -80,7 +80,7 @@ You will
   * You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.
   * Why was the data collected/curated? Who put it together? (This is important, if you don't know why it was collected then that might not be a good dataset to look at.
 * Describe the different data files used and what each variable means. 
-  * If you have many variables then only describe the most relevant ones and summarize the rest.
+  * If you have many variables then only describe the most relevant ones and summarize the rest. 
 * Describe any cleaning you had to do for your data.
   * You *must* include a link to your `load_and_clean_data.R` file.
   * Rename variables and recode factors to make data more clear.
@@ -95,7 +95,7 @@ You will
 ----
 ## Our work: On this page
 
-The data (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of 
+Our base data that our analysis begins from (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of 
 Education Statistics, a federal agency appointed to serve the U.S. department 
 of education. The data is collected using two primary surveys: The Common Core 
 of Data (CCD) and the Private School Survey (PSS). The data from these two 
@@ -124,56 +124,27 @@ suppressWarnings(
 )
 ```
 
-Currently, we are only looking at the one ELSI data file, but we plan to 
-incorporate more as we progress in our project timeline for auxiliary analyses. 
+The following variables are currently included in the above data set: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important contributing factors to school enrollment. Race/Ethnicity can reflect cultural differences and disparities in access to resources in segregated communities, thus it is important to analyze how systemic issues affect enrollment and cross reference grade as well to compare effects. Gender can also have a significant effect based on certain disparities in mental health and learning disabilities that can be found between males and females. Finally, we felt Pupil/Teacher ratio was another important factor as certain school districts in lower income communities tend to be deprived of resources (due to smaller tax base), thus  this could lower enrollment as parents or students may feel they get less out of school. 
 
-The following variables are currently included in our dataset: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important contributing factors to school enrollment. Race/Ethnicity can reflect cultural 
-differences and disparities in access to resources in segregated communities, 
-thus it is important to analyze how systemic issues affect enrollment and cross
-reference grade as well to compare effects. Gender can also have a significant 
-effect based on certain disparities in mental health and learning disabilities 
-that can be found between males and females. Finally, we felt Pupil/Teacher 
-ratio was another important factor as certain school districts in lower income 
-communities tend to be deprived of resources (due to smaller tax base), thus 
-this could lower enrollment as parents or students may feel they get less out 
-of school. 
+```{r}
+suppressWarnings(
+  source("scripts/clean_aid_data.R", echo = FALSE)
+)
+```
 
-Data Cleaning and Preprocessing - Our initial step involved  data 
-cleaning to ensure data integrity and accuracy. This included removing all 
-‘NA’ values based on the following criteria:
+From the same ELSI data source, our group also chose to look at data on aid programs. We thought it would be interesting to see how certain racial groups may be more inclined or likely to be part of federal aid programs, and were specifically wondering if these trends would differ state to state. This 'ELSI_aid' data set contains columns related to the state a school is located in, the school's name,  how many children received a free lunch program and a reduced price lunch program (split up by race and age), and lowest and highest grades offered at the school.  
 
-‘†’ represented data that was inapplicable, which we converted to NA for 
-clarity.  
-‘-’ denoted missing data,   
-while ‘‡’ indicated data not meeting our quality standards.  
-Both were also transformed to NA.  
-We then removed rows containing any NA values to create a consistent 
-and reliable dataset. Additionally, all negative values were eliminated, as they
-were considered erroneous entries.  
-Moreover, some standardization of state names was done to ensure that we were 
-not counting duplicates of states which only differed by capitalization. 
+For additional auxiliary analyses and to be able to draw more meaningful conclusions, our group decided to look into an additional data sourced from the US Census database. From the US Census data base, we pulled information about each state's racial breakdown. More specifically, we aimed to find data on a per county basis so we could identify and compare to trends found in our original data set. Given that we had the location of each school, the crossing was easier to do. The following variables are currently included in the additional data set: INSERT VARS
 
-Future Dataset Restructuring. 
-To support more detailed analysis, we’re considering restructuring the dataset 
-by segmenting it into various tables based on factors like academic year, grade,
-and gender. Here are two specific areas of interest:  
+Data Cleaning and Preprocessing - Our initial step involved  data cleaning for all three of our files to ensure data integrity and accuracy. 
+For the first file, this included removing all ‘NA’ values based on the following criteria:
+‘†’ represented data that was inapplicable, which we converted to NA for clarity, ‘-’ denoted missing data, while ‘‡’ indicated data not meeting our quality standards. Both were also transformed to NA. We then removed rows containing any NA values to create a consistent and reliable data set. Additionally, all negative values were eliminated, as they were considered erroneous entries. Moreover, some standardization of state names was done to ensure that we were not counting duplicates of states which only differed by capitalization. Lastly, we cleaned up duplicate state name columns in our data set by dropping the replicated columns.
 
-Academic Year - By organizing data by academic year, we can examine trends  
-impacted by significant events like COVID-19. For instance, research suggests 
-the pandemic increased "social avoidance," particularly among male students, 
-leading to decreased motivation for school attendance due to diminished social interaction. Among younger students, parental choices rooted in safety habits 
-established during the pandemic may also contribute to attendance shifts. 
-By segmenting attendance data by grade over academic years, we can better 
-understand these nuances.  
+For the second data file related to the lunch data, less cleaning had to be done, but we wanted to ensure there was a style-match to our original data set. To add government lunch data columns, we went to the ELSI website and added the cols seen in clean_aid_data while removing some redundant constant columns like state name per year. Plus, while adding the columns to make the table, we added for the same years present in the new_data_clean data, 2018-19 to 2022-23.
 
-Gender and Race - Our data enables us to explore how systemic issues affect 
-enrollment patterns. Given the historical context of redlining and segregation 
-in the U.S., students of certain racial backgrounds are more likely to reside in resource-limited areas, impacting their educational opportunities. Analyzing 
-enrollment by race and gender can illuminate the ways these structural factors 
-shape enrollment trends in public schools, providing insights into broader 
-social inequities.
+For the third datafile related to the Tidycensus data, slightly more cleaning was needed due to the nature of how Tidycensus treats “Hispanic/Latino” as an ethnicity–thus a separate category. This is unlike our school enrollment data set which treats Hispanic as a race (like Black, White, Asian, etc). We decided the best method around this was to look at the 2nd category in the census, and create a new category of Hispanics. Then shape the remaining categories proportionally to the remaining population. This obviously would not be a perfect representation but it would still keep general proportions. 
 
-This restructured dataset, segmented by academic year, grade, gender, and race, 
+These cleaned and restructured data sets,
 will allow us to uncover patterns and generate insights into the various 
 influences on school enrollment and attendance, supporting a comprehensive 
 analysis of educational trends and their underlying factors.
