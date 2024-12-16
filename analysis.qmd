@@ -68,9 +68,20 @@ You will
 -   Organization and cleanliness.
     -   Make sure to remove excessive warnings, hide most or all code, organize with sections or multiple pages, use bullets, etc.
     -   This page should be self-contained, i.e. provide a description of the relevant data.
-    
-```{r}
 
-```
+## Introduction
 
-    
+Throughout this semester, our team has aimed to answer the following questions:
+
+> *Is dependency on Free and Reduced Lunch programs in public schools proportional to the minority population in those areas? That is, are more students enrolled in such programs when they come from an area that is predominantly African American groups, Hispanic groups, etc.?*
+
+By looking at public school data retained from the **Common Core** and cross-comparing with **Census data** obtained from the government, we have been able to compile our findings as presented below.
+
+---
+
+## Section 1: Exploratory Data Analysis
+
+### 1.1 Top 10 Schools with the Highest Number of Students Enrolled in Free and Reduced Lunch Programs
+
+We start by extracting the top 10 schools from the school year **2022–2023** with the highest number of students enrolled in government-aided lunch programs. Here, we considered both the **Free Lunch Program** and the **Reduced Lunch Program**, combining data from both.
+

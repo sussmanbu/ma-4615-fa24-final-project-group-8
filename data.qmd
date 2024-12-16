@@ -1,74 +1,11 @@
 ---
 title: Data
-description: We describe the sources of our data and the cleaning process.
+description: On this page, we describe the sources of our data and the cleaning process in detail. The goal is to ensure that anyone visiting our website can largely replicate our analyses by running this script on the original datasets to clean and prepare them for analysis.
 toc: true
 draft: false
 ---
 
 ![](images/data-import-cheatsheet-thumbs.png)
-
-
-This comes from the file `data.qmd`.
-
-Your first steps in this project will be to find data to work on.
-
-I recommend trying to find data that interests you and that you are knowledgeable about. A bad example would be if you have no interest in video games but your data set is about video games. I also recommend finding data that is related to current events, social justice, and other areas that have an impact.
-
-
-Initially, you will study _one dataset_ but later you will need to combine that data with another dataset. For this reason, I recommend finding data that has some date and/or location components. These types of data are conducive to interesting visualizations and analysis and you can also combine this data with other data that also has a date or location variable.
-Data from the census, weather data, economic data, are all relatively easy to combine with other data with time/location components.
-
-
-## What makes a good data set?
-
-* Data you are interested in and care about.
-* Data where there are a lot of potential questions that you can explore.
-* A data set that isn't completely cleaned already.
-* Multiple sources for data that you can combine.
-* Some type of time and/or location component.
-
-
-## Where to keep data?
-
-
-Below 50mb: In `dataset` folder
-
-Above 50mb: In `dataset_ignore` folder. This folder will be ignored by `git` so you'll have to manually sync these files across your team.
-
-### Sharing your data
-
-
-For small datasets (<50mb), you can use the `dataset` folder that is tracked by github. Add the files just like you would any other file.
-
-If you create a folder named `data` this will cause problems.
-
-For larger datasets, you'll need to create a new folder in the project root directory named `dataset-ignore`. This will be ignored by git (based off the `.gitignore` file in the project root directory) which will help you avoid issues with Github's size limits. Your team will have to manually make sure the data files in `dataset-ignore` are synced across team members.
-
-Your [load_and_clean_data.R](/scripts/load_and_clean_data.R) file is how you will load and clean your data. Here is a an example of a very simple one.
-
-```{r}
-source(
-  "scripts/load_and_clean_data.R",
-  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
-)
-```
-You should never use absolute paths (eg. `/Users/danielsussman/path/to/project/` or `C:\MA415\\Final_Project\`).
-
-You might consider using the `here` function from the [`here` package](https://here.r-lib.org/articles/here.html) to avoid path problems.
-
-### Load and clean data script
-```{r}
-source(
-  "scripts/clean_data.R",
-  echo = FALSE # Use echo=FALSE or omit it to avoid code output  
-)
-```
-
-The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them.
-This file might create a derivative data set that you then use for your subsequent analysis.
-Note that you don't need to run this script from every post/page.
-Instead, you can load in the results of this script, which could be plain text files or `.RData` files. In your data page you'll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes.
-To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` which appears as [cleaning script](/scripts/load_and_clean_data.R). 
 
 ----
 
@@ -91,60 +28,138 @@ You will
   * Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.
   * This page should be self-contained.
 
+## SECTION 1: Data Sources
 
-----
-## Our work: On this page
-
-Our base data that our analysis begins from (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of 
-Education Statistics, a federal agency appointed to serve the U.S. department 
-of education. The data is collected using two primary surveys: The Common Core 
-of Data (CCD) and the Private School Survey (PSS). The data from these two 
-surveys come from a collection of other sources; primarily the state dropout 
-and completion data file, and Local Education Agency Universal Survey. Finance 
-data was also utilized for certain variables. The Institute of Education 
-Sciences collected the data to analyze “education trends”, to further 
-initiatives to improve access to higher education. Finding the data from the 
-original source is possible but tedious, as data is collected by state and 
-locally. 
-
-In our `clean_data.R` file, the code snippet utilizes the
-`tidyverse` package to handle data manipulation and analysis tasks
-efficiently. It reads in a RData file named `clean_data.R`
-located within the `datasets` directory using the `load()` function. The
-cleaned data is saved as an `.rds` file named `our_data_clean.rds` in
-the `scripts` directory using the `saveRDS` function. This ensures that
-the cleaned data set can be easily accessed and shared for future
-analyses. Additionally, the `readRDS` function is used to read the saved
-`.rds` file, enabling the retrieval of the cleaned data set for further
-processing or exploration.
+### 1.1 Load Data Script
 
 ```{r}
-suppressWarnings(
-  source("scripts/clean_data.R", echo = FALSE)
+source(
+  "scripts/clean_data.R",
+  echo = FALSE # Use echo = FALSE or omit to suppress code output
 )
 ```
 
-The following variables are currently included in the above data set: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important contributing factors to school enrollment. Race/Ethnicity can reflect cultural differences and disparities in access to resources in segregated communities, thus it is important to analyze how systemic issues affect enrollment and cross reference grade as well to compare effects. Gender can also have a significant effect based on certain disparities in mental health and learning disabilities that can be found between males and females. Finally, we felt Pupil/Teacher ratio was another important factor as certain school districts in lower income communities tend to be deprived of resources (due to smaller tax base), thus  this could lower enrollment as parents or students may feel they get less out of school. 
+First, you can load the data set here: [**cleaning script**](/scripts/clean_data.R).
+
+---
+
+## 1.2 Data Sourcing
+
+Our analysis begins with **base data** obtained from the [National Center of Education Statistics (NCES)](https://nces.ed.gov/ccd/elsi/), a federal agency appointed to serve the U.S. Department of Education. This data comes from two primary surveys:  
+
+1. **The Common Core of Data (CCD)**  
+2. **The Private School Survey (PSS)**  
+
+Both surveys integrate data from additional sources, including state dropout and completion data files and the Local Education Agency Universal Survey. Additionally, finance data was utilized for certain variables. These datasets were originally collected by the **Institute of Education Sciences** to analyze education trends and further initiatives to improve access to higher education.  
+
+While the data is accessible directly from the NCES, the retrieval process can be tedious, as it is collected at state and local levels.
+
+In our `clean_data.R` script, we used the **`tidyverse`** package to efficiently manipulate and prepare the data for analysis. The script:  
+
+- Reads an RData file (`clean_data.R`) located in the `datasets` directory.  
+- Saves the cleaned version as an **RDS file** (`our_data_clean.rds`) in the `scripts` directory using the `saveRDS()` function.  
+- Uses `readRDS()` to ensure the cleaned data can be accessed easily for further exploration.
+
+---
+
+### 1.3 Key Variables in Cleaned Data Set  
+
+The cleaned dataset contains the following variables:  
+
+- **School-Level Data**:  
+  - *School Name*  
+  - *State Name*  
+  - *Grades 1-8 Students*  
+  - *Grades 9-12 Students*  
+  - *Male Students* / *Female Students*  
+
+- **Race/Ethnicity Breakdown**:  
+  - *American Indian/Alaska Native Students*  
+  - *Asian or Asian/Pacific Islander Students*  
+  - *Hispanic Students*  
+  - *White Students*  
+  - *Native Hawaiian or Other Pacific Islander Students*  
+
+- **Other Variables**:  
+  - *Pupil/Teacher Ratio*  
+
+We selected these variables based on their relevance as potential contributing factors to school enrollment trends.  
+- **Race/Ethnicity** reflects cultural disparities and access to resources in segregated communities, making it essential for analyzing systemic issues.  
+- **Gender** was included due to existing disparities in mental health and learning outcomes between males and females.  
+- **Pupil/Teacher Ratio** was considered because lower-income communities often experience resource shortages, which can affect school enrollment and perceived quality.
+
+---
+
+### 1.4 Government-Aided Lunch Program Data
 
 ```{r}
 suppressWarnings(
-  source("scripts/clean_aid_data.R", echo = FALSE)
+  source("scripts/gov_lunch_program.R", echo = FALSE)
 )
 ```
 
-From the same ELSI data source, our group also chose to look at data on aid programs. We thought it would be interesting to see how certain racial groups may be more inclined or likely to be part of federal aid programs, and were specifically wondering if these trends would differ state to state. This 'ELSI_aid' data set contains columns related to the state a school is located in, the school's name,  how many children received a free lunch program and a reduced price lunch program (split up by race and age), and lowest and highest grades offered at the school.  
+From the same **ELSI** data source, we incorporated data on **federal aid programs** (Free and Reduced Lunch Programs). This dataset, labeled **`ELSI_aid`**, includes:  
 
-For additional auxiliary analyses and to be able to draw more meaningful conclusions, our group decided to look into an additional data sourced from the US Census database. From the US Census data base, we pulled information about each state's racial breakdown. More specifically, we aimed to find data on a per county basis so we could identify and compare to trends found in our original data set. Given that we had the location of each school, the crossing was easier to do. The following variables are currently included in the additional data set: INSERT VARS
+- State Name  
+- School Name  
+- Total number of students receiving:  
+  - *Free Lunch* (split by race and age)  
+  - *Reduced Price Lunch* (split by race and age)  
+- Lowest and highest grades offered by the school.  
 
-Data Cleaning and Preprocessing - Our initial step involved  data cleaning for all three of our files to ensure data integrity and accuracy. 
-For the first file, this included removing all ‘NA’ values based on the following criteria:
-‘†’ represented data that was inapplicable, which we converted to NA for clarity, ‘-’ denoted missing data, while ‘‡’ indicated data not meeting our quality standards. Both were also transformed to NA. We then removed rows containing any NA values to create a consistent and reliable data set. Additionally, all negative values were eliminated, as they were considered erroneous entries. Moreover, some standardization of state names was done to ensure that we were not counting duplicates of states which only differed by capitalization. Lastly, we cleaned up duplicate state name columns in our data set by dropping the replicated columns.
+You can load it here:  [**cleaning script**](/scripts/gov_lunch_program.R).
 
-For the second data file related to the lunch data, less cleaning had to be done, but we wanted to ensure there was a style-match to our original data set. To add government lunch data columns, we went to the ELSI website and added the cols seen in clean_aid_data while removing some redundant constant columns like state name per year. Plus, while adding the columns to make the table, we added for the same years present in the new_data_clean data, 2018-19 to 2022-23.
+We were specifically interested in understanding whether participation in aid programs varies across racial groups and whether these trends differ by state.
 
-For the third datafile related to the Tidycensus data, slightly more cleaning was needed due to the nature of how Tidycensus treats “Hispanic/Latino” as an ethnicity–thus a separate category. This is unlike our school enrollment data set which treats Hispanic as a race (like Black, White, Asian, etc). We decided the best method around this was to look at the 2nd category in the census, and create a new category of Hispanics. Then shape the remaining categories proportionally to the remaining population. This obviously would not be a perfect representation but it would still keep general proportions. 
+---
 
-These cleaned and restructured data sets,
-will allow us to uncover patterns and generate insights into the various 
-influences on school enrollment and attendance, supporting a comprehensive 
-analysis of educational trends and their underlying factors.
+### 1.5 Additional Census Data
+
+To add further depth to our analysis, we sourced **demographic data** from the **U.S. Census Bureau**. This auxiliary dataset provides information about each state's racial breakdown at the county level. By cross-referencing this data with school locations, we aimed to identify regional patterns in enrollment trends.  
+
+The following variables were included in this dataset:  
+*INSERT VARIABLES HERE*.  
+
+---
+
+## SECTION 2: Data Cleaning and Pre-Processing
+
+To ensure the integrity and accuracy of our analysis, we implemented a rigorous data cleaning process across all three datasets.  
+
+### 2.1 **Cleaning School Enrollment Data**  
+- **Handling Missing Data**:  
+  - Converted placeholders (`†`, `-`, `‡`) to `NA` for clarity.  
+  - Removed rows with any remaining `NA` values to maintain consistency.  
+
+- **Standardizing State Names**:  
+  - Ensured uniform capitalization and removed duplicate state columns to avoid redundancy.  
+
+- **Eliminating Errors**:  
+  - Removed negative values, as they represented erroneous entries.  
+
+---
+
+### 2.2 **Cleaning Government Lunch Program Data**  
+- Minimal cleaning was required for this dataset.  
+- Columns were added for consistency with the **school enrollment data**:  
+  - Limited the time frame to school years **2018–2019 to 2022–2023**.  
+  - Removed redundant constant columns, such as repeated state names.  
+
+---
+
+### 2.3 **Cleaning Census Data**  
+The **U.S. Census data** required additional cleaning due to its treatment of *Hispanic/Latino* as an ethnicity rather than a race. This differs from our school enrollment dataset, which classifies *Hispanic* as a race.  
+
+To address this discrepancy:  
+- We created a new *Hispanic* category from the Census ethnicity data.  
+- Adjusted the remaining racial categories proportionally to reflect non-Hispanic populations.  
+
+While this approach is not a perfect representation, it preserves the general proportions needed for meaningful analysis.
+
+---
+
+## SECTION 3: Final Notes  
+
+The cleaned and standardized datasets allow us to uncover patterns and generate insights into various influences on school enrollment, participation in federal aid programs, and demographic trends. This pre-processed data provides a robust foundation for the analysis presented in subsequent sections.
+
+---

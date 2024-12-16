@@ -1,98 +1,114 @@
-# On this page, I am computing the minority population proportion for each school across each state.
-# This will be used to cross-compare with our second data set. 
-# That is, are these numbers representative of the population in those surrounding areas?
-# Then, I want to find the schools with the highest number of students enrolled in a government program. 
-# Do these match with the schools with the highest minority population?
+# On this page, I am:
+# Computing the minority population proportion for each school across each state and finding the schools with the highest minority population.
+# Finding the top 10 schools with the highest enrollment rates in Free and Reduced Lunch Programs
+# Breaking down the minority population for these schools
 
 library(dplyr)
 library(ggplot2)
 
-# Create a list of terms that identify the minority group columns 
-minority_patterns <- c(
-  "American Indian/Alaska Native Students",
-  "Asian or Asian/Pacific Islander Students",
-  "Hispanic Students",
-  "Black or African American Students",
-  "Nat. Hawaiian or Other Pacific Isl. Students",
-  "Two or More Races Students"
-)
-
-# Match columns with the titles
-minority_columns <- grep(paste(minority_patterns, collapse = "|"), colnames(new_data_clean), value = TRUE)
-non_minority_columns <- grep("White Students", colnames(new_data_clean), value = TRUE)
-total_students_columns <- grep("Total Race/Ethnicity", colnames(new_data_clean), value = TRUE)
-
-# Convert matched columns to numeric for calculations
-new_data_clean <- new_data_clean %>%
-  mutate(across(all_of(minority_columns), as.numeric, .names = "numeric_{col}")) %>%
-  mutate(across(all_of(non_minority_columns), as.numeric, .names = "numeric_{col}")) %>%
-  mutate(across(all_of(total_students_columns), as.numeric, .names = "numeric_{col}"))
-
-# Update columns to use the numeric versions
-minority_numeric_columns <- grep("^numeric_", names(new_data_clean), value = TRUE, perl = TRUE)
-minority_numeric_columns <- minority_numeric_columns[grepl(paste(minority_patterns, collapse = "|"), minority_numeric_columns)]
-
-non_minority_numeric_columns <- grep("^numeric_", names(new_data_clean), value = TRUE, perl = TRUE)
-non_minority_numeric_columns <- non_minority_numeric_columns[grepl("White Students", non_minority_numeric_columns)]
-
-total_students_numeric_columns <- grep("^numeric_", names(new_data_clean), value = TRUE, perl = TRUE)
-total_students_numeric_columns <- total_students_numeric_columns[grepl("Total Race/Ethnicity", total_students_numeric_columns)]
-
-# Perform row-wise calculations for each school 
-new_data_clean <- new_data_clean %>%
+# Convert race columns to numeric
+clean_aid_data <- clean_aid_data %>%
   mutate(
-    Minority_Total = rowSums(select(., all_of(minority_numeric_columns)), na.rm = TRUE),
-    Non_Minority_Total = rowSums(select(., all_of(non_minority_numeric_columns)), na.rm = TRUE),
-    Total_Students = rowSums(select(., all_of(total_students_numeric_columns)), na.rm = TRUE),
-    Minority_Proportion = Minority_Total / Total_Students,
-    Non_Minority_Proportion = Non_Minority_Total / Total_Students
+    `American Indian/Alaska Native Students [Public School] 2022-23` = as.numeric(`American Indian/Alaska Native Students [Public School] 2022-23`),
+    `Asian or Asian/Pacific Islander Students [Public School] 2022-23` = as.numeric(`Asian or Asian/Pacific Islander Students [Public School] 2022-23`),
+    `Hispanic Students [Public School] 2022-23` = as.numeric(`Hispanic Students [Public School] 2022-23`),
+    `Black or African American Students [Public School] 2022-23` = as.numeric(`Black or African American Students [Public School] 2022-23`),
+    `White Students [Public School] 2022-23` = as.numeric(`White Students [Public School] 2022-23`),
+    `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` = as.numeric(`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23`),
+    `Two or More Races Students [Public School] 2022-23` = as.numeric(`Two or More Races Students [Public School] 2022-23`),
+    `Total Race/Ethnicity [Public School] 2022-23` = as.numeric(`Total Race/Ethnicity [Public School] 2022-23`)
   )
 
-# Sums up the total minority, non-minority, and total student counts for each state 
-# and calculates proportions of minorities against non-minorities
-statewise_data <- new_data_clean %>%
-  group_by(`State Name [Public School] Latest available year`) %>%
-  summarise(
-    Total_Minority = sum(Minority_Total, na.rm = TRUE),
-    Total_Non_Minority = sum(Non_Minority_Total, na.rm = TRUE),
-    Total_Students = sum(Total_Students, na.rm = TRUE),
-    Minority_Proportion = Total_Minority / Total_Students,
-    Non_Minority_Proportion = Total_Non_Minority / Total_Students
-  )
+# Calculate minority population and filter top 10 schools
+top_minority_schools <- clean_aid_data %>%
+  mutate(
+    Minority_Population = 
+      `American Indian/Alaska Native Students [Public School] 2022-23` +
+      `Asian or Asian/Pacific Islander Students [Public School] 2022-23` +
+      `Hispanic Students [Public School] 2022-23` +
+      `Black or African American Students [Public School] 2022-23` +
+      `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` +
+      `Two or More Races Students [Public School] 2022-23`
+  ) %>%
+  arrange(desc(Minority_Population)) %>%  # Sort by Minority Population descending
+  head(10) %>%                            # Keep top 10 schools
+  select(`School Name`, Minority_Population, `Total Race/Ethnicity [Public School] 2022-23`) %>%
+  mutate(Minority_Percentage = (Minority_Population / `Total Race/Ethnicity [Public School] 2022-23`) * 100)
 
-# Print school-level proportions
-print(new_data_clean %>% 
-        select(`School Name`, `State Name [Public School] Latest available year`, Minority_Proportion, Non_Minority_Proportion))
-
-# Print state-level aggregates
-print(statewise_data)
-
-# Graph Top 10 Schools with highest minority population proportion
-top_schools <- new_data_clean %>%
-  arrange(desc(Minority_Proportion)) %>%
-  head(10)
+# Display the results
+print(top_minority_schools)
 
 # Issue I am running into - Some of the schools are so small and they only have a minority population
 
-# Bar graph
-ggplot(top_schools, aes(x = reorder(`School Name`, Minority_Proportion), y = Minority_Proportion)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Top 10 Schools with Highest Minority Population Proportion",
-       x = "School Name",
-       y = "Minority Population Proportion") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme_minimal()
+# Calculating enrollment rates for the top 10 schools with most students in Free and Reduced Lunch Programs
 
-# Graph Top 10 States with highest minority population proportion
-top_states <- statewise_data %>%
-  arrange(desc(Minority_Proportion)) %>%
-  head(10)
+schools <- c(
+  "HIGHLANDS COMMUNITY CHARTER",
+  "NORTH STAR ACADEMY CHARTER SCHOOL",
+  "ALABAMA CONNECTIONS ACADEMY",
+  "READING SHS",
+  "CALIFORNIA VIRTUAL ACADEMY @ LOS ANGELES",
+  "UPPER DARBY SHS",
+  "RIVER SPRINGS CHARTER",
+  "NORTH SHORE SENIOR HIGH",
+  "VISIONS IN EDUCATION",
+  "PARAMOUNT HIGH"
+)
 
-# Bar graph
-ggplot(top_states, aes(x = reorder(`State Name [Public School] Latest available year`, Minority_Proportion), y = Minority_Proportion)) +
-  geom_bar(stat = "identity", fill = "darkorange") +
-  labs(title = "Top 10 States with Highest Minority Population Proportion",
-       x = "State Name",
-       y = "Minority Population Proportion") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme_minimal()
+clean_aid_data <- clean_aid_data %>%
+  mutate(
+    `Free and Reduced Lunch Students [Public School] 2022-23` = as.numeric(`Free and Reduced Lunch Students [Public School] 2022-23`),
+    `Total Race/Ethnicity [Public School] 2022-23` = as.numeric(`Total Race/Ethnicity [Public School] 2022-23`)
+  )
+
+# Filter the data to include only the specified schools
+filtered_schools <- clean_aid_data %>%
+  filter(`School Name` %in% schools, `Total Race/Ethnicity [Public School] 2022-23` > 0) %>%
+  mutate(
+    Lunch_Enrollment_Rate = `Free and Reduced Lunch Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23`
+  ) %>%
+  select(`School Name`, 
+         `Free and Reduced Lunch Students [Public School] 2022-23`, 
+         `Total Race/Ethnicity [Public School] 2022-23`, 
+         Lunch_Enrollment_Rate)
+
+# Display the results
+print(filtered_schools)
+
+# Breakdown minority populations 
+
+clean_aid_data <- clean_aid_data %>%
+  mutate(
+    `American Indian/Alaska Native Students [Public School] 2022-23` = as.numeric(`American Indian/Alaska Native Students [Public School] 2022-23`),
+    `Asian or Asian/Pacific Islander Students [Public School] 2022-23` = as.numeric(`Asian or Asian/Pacific Islander Students [Public School] 2022-23`),
+    `Hispanic Students [Public School] 2022-23` = as.numeric(`Hispanic Students [Public School] 2022-23`),
+    `Black or African American Students [Public School] 2022-23` = as.numeric(`Black or African American Students [Public School] 2022-23`),
+    `White Students [Public School] 2022-23` = as.numeric(`White Students [Public School] 2022-23`),
+    `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` = as.numeric(`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23`),
+    `Two or More Races Students [Public School] 2022-23` = as.numeric(`Two or More Races Students [Public School] 2022-23`),
+    `Total Race/Ethnicity [Public School] 2022-23` = as.numeric(`Total Race/Ethnicity [Public School] 2022-23`)
+  )
+
+# Filter for the Top 10 Schools and calculate race percentages
+race_breakdown <- clean_aid_data %>%
+  filter(`School Name` %in% schools, `Total Race/Ethnicity [Public School] 2022-23` > 0) %>%
+  mutate(
+    American_Indian_Percent = `American Indian/Alaska Native Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Asian_Percent = `Asian or Asian/Pacific Islander Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Hispanic_Percent = `Hispanic Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Black_Percent = `Black or African American Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    White_Percent = `White Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Hawaiian_Percent = `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Two_Or_More_Races_Percent = `Two or More Races Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100
+  ) %>%
+  select(`School Name`,
+         American_Indian_Percent,
+         Asian_Percent,
+         Hispanic_Percent,
+         Black_Percent,
+         White_Percent,
+         Hawaiian_Percent,
+         Two_Or_More_Races_Percent)
+
+# Display the results
+print(race_breakdown)
