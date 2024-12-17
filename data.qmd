@@ -13,13 +13,6 @@ draft: false
 
 ### 1.1 Load Data Script
 
-```{r}
-source(
-  "scripts/clean_data.R",
-  echo = FALSE # Use echo = FALSE or omit to suppress code output
-)
-```
-
 First, you can load the data set here: [**cleaning script**](/scripts/clean_data.R).
 
 ---
@@ -73,11 +66,7 @@ We selected these variables based on their relevance as potential contributing f
 
 ### 1.4 Government-Aided Lunch Program Data
 
-```{r}
-suppressWarnings(
-  source("scripts/gov_lunch_program.R", echo = FALSE)
-)
-```
+You can load the data set utilized here: [**Government-Aided Lunch Program Data**](/scripts/gov_lunch_program.R)
 
 From the same **ELSI** data source, we incorporated data on **federal aid programs** (Free and Reduced Lunch Programs). This dataset, labeled **`ELSI_aid`**, includes:  
 
