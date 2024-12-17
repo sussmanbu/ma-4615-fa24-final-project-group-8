@@ -5,69 +5,9 @@ toc: true
 draft: false
 ---
 
-![](https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg)
+![](images/Lunchbox.webp)
 
 This comes from the file `analysis.qmd`.
-
-We describe here our detailed data analysis. This page will provide an overview of what questions you addressed, illustrations of relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question. You'll also reflect on next steps and further analysis.
-
-The audience for this page is someone like your class mates, so you can expect that they have some level of statistical and quantitative sophistication and understand ideas like linear and logistic regression, coefficients, confidence intervals, overfitting, etc. 
-
-While the exact number of figures and tables will vary and depend on your analysis, you should target around 5 to 6. An overly long analysis could lead to losing points.
-If you want you can link back to your blog posts or create separate pages with more details.
-
-The style of this paper should aim to be that of an academic paper. 
-I don't expect this to be of publication quality but you should keep that aim in mind.
-Avoid using "we" too frequently, for example "We also found that ...". Describe your methodology and your findings but don't describe your whole process.
-
-### Example of loading data
-
-The code below shows an example of loading the loan refusal data set (which you should delete at some point).
-
-```{r}
-library(tidyverse)
-print(getwd())
-data <- read_rds(here::here("dataset/loan_refusal_clean.rds"))
-```
-
-## Note on Attribution
-
-In general, you should try to provide links to relevant resources, especially those that helped you. You don't have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don't need a formal citation.
-
-If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
-
-```         
-> To be or not to be.
-```
-
-> To be or not to be.
-
-------------------------------------------------------------------------
-
-## Rubric: On this page
-
-You will
-
--   Introduce what motivates your Data Analysis (DA)
-    -   Which variables and relationships are you most interested in?
-    -   What questions are you interested in answering?
-    -   Provide context for the rest of the page. This will include figures/tables that illustrate aspects of the data of your question.
--   Modeling and Inference
-    -   The page will include some kind of formal statistical model. This could be a linear regression, logistic regression, or another modeling framework.
-    -   Explain the ideas and techniques you used to choose the predictors for your model. (Think about including interaction terms and other transformations of your variables.)
-    -   Describe the results of your modelling and make sure to give a sense of the uncertainty in your estimates and conclusions.
--   Explain the flaws and limitations of your analysis
-    -   Are there some assumptions that you needed to make that might not hold? Is there other data that would help to answer your questions?
--   Clarity Figures
-    -   Are your figures/tables/results easy to read, informative, without problems like overplotting, hard-to-read labels, etc?
-    -   Each figure should provide a key insight. Too many figures or other data summaries can detract from this. (While not a hard limit, around 5 total figures is probably a good target.)
-    -   Default `lm` output and plots are typically not acceptable.
--   Clarity of Explanations
-    -   How well do you explain each figure/result?
-    -   Do you provide interpretations that suggest further analysis or explanations for observed phenomenon?
--   Organization and cleanliness.
-    -   Make sure to remove excessive warnings, hide most or all code, organize with sections or multiple pages, use bullets, etc.
-    -   This page should be self-contained, i.e. provide a description of the relevant data.
 
 ## Introduction
 
@@ -81,37 +21,19 @@ By looking at public school data retained from the **Common Core** and cross-com
 
 ## Section 1: Exploratory Data Analysis
 
+Load the necessary data set here:
+
+```{r}
+library(tidyverse)
+print(getwd())
+data <- read_rds(here::here("dataset/clean_aid_data.rds"))
+```
+
 ### 1.1 Top 10 Schools with the Highest Number of Students Enrolled in Free and Reduced Lunch Programs
 
 We start by extracting the top 10 schools from the school year **2022–2023** with the highest number of students enrolled in government-aided lunch programs. Here, we considered both the **Free Lunch Program** and the **Reduced Lunch Program**, combining data from both.
 
-```{r}
-library(dplyr)
-library(ggplot2)
-
-# Convert the 'Free and Reduced Lunch Students [Public School] 2022-23' column to numeric for calculations
-clean_aid_data <- clean_aid_data %>%
-  mutate(`Free and Reduced Lunch Students [Public School] 2022-23` = as.numeric(`Free and Reduced Lunch Students [Public School] 2022-23`))
-
-# Identify the top 10 schools with the most enrollments in Free and Reduced Lunch Students
-top_schools_lunch <- clean_aid_data %>%
-  arrange(desc(`Free and Reduced Lunch Students [Public School] 2022-23`)) %>%
-  head(10)
-
-# Create the bar chart
-ggplot(top_schools_lunch, aes(x = reorder(`School Name`, -`Free and Reduced Lunch Students [Public School] 2022-23`), 
-                              y = `Free and Reduced Lunch Students [Public School] 2022-23`)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Top 10 Schools with Most Free and Reduced Lunch Enrollments",
-       x = "School Name",
-       y = "Number of Students") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 50, hjust = 1, vjust = 1, size = 10), # Rotates and formats x-axis text
-    axis.title.x = element_text(margin = margin(t = 10)), # Adds margin to the x-axis title
-    axis.title.y = element_text(margin = margin(r = 10))  # Adds margin to the y-axis title
-  )
-```
+![](images/Top 10 Schools.png)
 
 From the data, the **top 10 schools** with the highest enrollment rates are:  
 
@@ -129,6 +51,120 @@ From the data, the **top 10 schools** with the highest enrollment rates are:
 | Paramount High                                | 94.3%                  |
 
 Throughout the rest of this analysis, our team chose to focus on these 10 schools. 
+
+## 1.2 - Minority Breakdown for the Top 10 Schools with the Most Free and Reduced Lunch Enrollments
+
+Now, we want to break down the ratio of minority students within these schools. 
+
+Here’s a clean and organized version for your **Analysis Page** using headings, bullet points, and tables to make the information clear and easy to digest:  
+
+---
+
+## Minority Student Ratios in Top Schools  
+
+To understand the relationship between **minority student populations** and the **Free or Reduced Lunch Program** participation rates, we analyzed the top schools.  
+
+### Highlands Community Charter School (Sacramento, CA)  
+- **Free or Reduced Lunch**: 85%  
+- **Minority Population in School**:  
+   - Hispanic: 20.4%  
+   - African American: 2.5%  
+   - Asian: 19.4%  
+   - **Total Minority**: 42.3%  
+
+---
+
+### North Star Academy Charter School (Newark, NJ)  
+- **Free or Reduced Lunch**: 84%  
+- **Minority Population in School**:  
+   - Hispanic: 16.6%  
+   - African American: 80.8%  
+   - Asian: 0.2%  
+   - **Total Minority**: 97.6%  
+   
+---
+
+### Alabama Connections Academy (Athens, AL)  
+- **Free or Reduced Lunch**: 65%  
+- **Minority Population in School**:  
+   - Hispanic: 5.8%  
+   - African American: 29.8%  
+   - Asian: 0.8%  
+   - **Total Minority**: 36.4%  
+
+---
+
+### Reading Senior High School (Reading, PA)  
+- **Free or Reduced Lunch**: 86%  
+- **Minority Population in School**:  
+   - Hispanic: 86.4%  
+   - African American: 7.4%  
+   - Asian: 0.1%  
+   - **Total Minority**: 93.9%  
+
+---
+
+### California Virtual Academy (Simi Valley, CA)  
+- **Free or Reduced Lunch**: 74%  
+- **Minority Population in School**:  
+   - Hispanic: 53.6%  
+   - African American: 20%  
+   - Asian: 5.5%  
+   - **Total Minority**: 79.1%  
+
+---
+
+### Upper Darby Senior High School (Drexel Hill, PA)  
+- **Free or Reduced Lunch**: 95%  
+- **Minority Population in School**:  
+   - Hispanic: 12.9%  
+   - African American: 52.2%  
+   - Asian: 14.1%  
+   - **Total Minority**: 79.2%  
+
+---
+
+### River Springs Charter School (Temecula, CA)  
+- **Free or Reduced Lunch**: 58%  
+- **Minority Population in School**:  
+   - Hispanic: 48.8%  
+   - African American: 4.7%  
+   - Asian: 2.5%  
+   - **Total Minority**: 56%  
+
+---
+
+### North Shore Senior High School (Houston, TX)  
+- **Free or Reduced Lunch**: 86%  
+- **Minority Population in School**:  
+   - Hispanic: 71.7%  
+   - African American: 22.3%  
+   - Asian: 0.9%  
+   - **Total Minority**: 94.9%  
+
+---
+
+### Visions In Education (Carmichael, CA)  
+- **Free or Reduced Lunch**: 55%  
+- **Minority Population in School**:  
+   - Hispanic: 31.6%  
+   - African American: 8.8%  
+   - Asian: 5.4%  
+   - **Total Minority**: 45.8%  
+
+---
+
+### Paramount High (Paramount, CA)  
+- **Free or Reduced Lunch**: 94%  
+- **Minority Population in School**:  
+   - Hispanic: 89.9%  
+   - African American: 6.7%  
+   - Asian: 1.3%  
+   - **Total Minority**: 97.9%  
+
+---
+
+Among the top 10 schools with the highest enrollment rates of students in the Free and Reduced Lunch programs, those with the largest minority populations—particularly African American and Hispanic students—also had the highest number of students relying on these government programs. This suggests a potential correlation between a larger African American and Hispanic student population and increased program participation. In the following section, we will cross-reference this data with census data to examine whether a higher minority population in general corresponds to a greater percentage of students enrolled in these programs.
 
 ## 1.3 Top 10 Schools with the Largest Minority Populations
 
@@ -148,3 +184,185 @@ Another part of our team’s analysis included finding the top 10 schools with t
 | Blue Ridge Academy                            | 61.1%                  |
 
 Several schools appeared on both lists—**North Star Academy Charter School**, **Reading SHS**, **California Virtual Academy @ Los Angeles**, and **North Shore Senior High**—further supporting our theory that a higher proportion of minority students is associated with a greater percentage of students enrolled in Free and Reduced Lunch programs.
+
+## Section 2: Cross-Comparison
+
+After finding the top ten schools with the largest amount of students in Free and Reduced Lunch Programs above, we aim to see if there is a correlation between the proportion of minorities in those schools and the proportion of minorities in the surrounding county. 
+
+Here’s a clean and organized version for your **Analysis Page** using headings, bullet points, and tables to make the information clear and easy to digest:  
+
+---
+
+## Minority Student Ratios in Top Schools  
+
+To understand the relationship between **minority student populations** and the **Free or Reduced Lunch Program** participation rates, we analyzed the top schools.  
+
+### Highlands Community Charter School (Sacramento, CA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 36%  
+   - African American: 15%  
+   - Asian: 18%  
+   - **Total Minority**: 69%  
+
+---
+
+### North Star Academy Charter School (Newark, NJ)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 26%  
+   - African American: 49%  
+   - Asian: 0%  
+   - **Total Minority**: 75%  
+
+---
+
+### Alabama Connections Academy (Athens, AL)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 8%  
+   - African American: 4%  
+   - Asian: 0%  
+   - **Total Minority**: 12%  
+
+---
+
+### Reading Senior High School (Reading, PA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 73%  
+   - African American: 6%  
+   - Asian: 0%  
+   - **Total Minority**: 79%  
+
+---
+
+### California Virtual Academy (Simi Valley, CA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 26%  
+   - African American: 1%  
+   - Asian: 11%  
+   - **Total Minority**: 38%  
+
+---
+
+### Upper Darby Senior High School (Drexel Hill, PA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 5%  
+   - African American: 19%  
+   - Asian: 5%  
+   - **Total Minority**: 29%  
+
+---
+
+### River Springs Charter School (Temecula, CA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 26%  
+   - African American: 4%  
+   - Asian: 11%  
+   - **Total Minority**: 41%  
+
+---
+
+### North Shore Senior High School (Houston, TX)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 69%  
+   - African American: 16%  
+   - Asian: 4%  
+   - **Total Minority**: 89%  
+
+---
+
+### Visions In Education (Carmichael, CA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 15%  
+   - African American: 6%  
+   - Asian: 8%  
+   - **Total Minority**: 29%  
+
+---
+
+### Paramount High (Paramount, CA)  
+- **Minority Population in Zip Code**:  
+   - Hispanic: 81%  
+   - African American: 9%  
+   - Asian: 4%  
+   - **Total Minority**: 94%  
+
+---
+
+One observation is that a high minority population at a school does not seem to necessarily correlate with the zip code the school is located in. Several schools yielded over 50% minority but the zip code yielded less than 25% minority; such as Upper Darby SHS and to a lesser extent, Athens Academy and Visions in Education. This helps to illustrate the extent of school segregation that takes place in our country. 
+
+## Section 3: Statistical Modeling
+### 3.1 - Modeling
+
+Two models were used, namely, a negative binomial regression, and a logistic regression. Running the code below gives summary statistics with estimated coefficients and p values. For the negative binomial model, coefficients were exponentiated to convert them into rate ratios. Example interpretation: `American Indian/Alaska Native Students [Public School] 2022-23` has a rate ratio of 1.0023239. This means that, for every additional American Indian/Alaska Native student at a school, we can expect the count of free-lunch program enrolments at that school to increase by 0.23%. The first plot below shows the rate ratios for each race. Also, based on the summary statistics, all races have a statistically significant p value at the 5% level, and Asian students were the only race with a rate ratio slightly less than 1. This implies that for every additional Asian student at a school, we can expect the count of free-lunch program enrolments at that school to decrease very slightly. The plot below shows that American Indian/Alaska Native students brought the most impact into their schools regarding increasing free-lunch enrollment, while White and Asian students are much less impactful. There is also a relatively larger variance for American Indian/Alaska Native, Native Hawaiian/Other Pacific Islander, and Two or More Races students as opposed to the rest of the groups.
+
+```{r}
+library(MASS) # Used for negative binomial regression
+
+cleaned_data$`Free Lunch Eligible [Public School] 2022-23` <- as.numeric(cleaned_data$`Free Lunch Eligible [Public School] 2022-23`)
+cleaned_data$`Black or African American Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Black or African American Students [Public School] 2022-23`)
+cleaned_data$`White Students [Public School] 2022-23` <- as.numeric(cleaned_data$`White Students [Public School] 2022-23`)
+cleaned_data$`Hispanic Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Hispanic Students [Public School] 2022-23`)
+cleaned_data$`American Indian/Alaska Native Students [Public School] 2022-23` <- as.numeric(cleaned_data$`American Indian/Alaska Native Students [Public School] 2022-23`)
+cleaned_data$`Asian or Asian/Pacific Islander [Public School] 2022-23` <- as.numeric(cleaned_data$`Asian or Asian/Pacific Islander Students [Public School] 2022-23`)
+cleaned_data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23`)
+cleaned_data$`Two or More Races Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Two or More Races Students [Public School] 2022-23`)
+cleaned_data$`Total Race/Ethnicity [Public School] 2022-23` <- as.numeric(cleaned_data$`Total Race/Ethnicity [Public School] 2022-23`)
+
+# Negative Binomial Regression
+
+negative_binomial_model <- glm.nb(`Free Lunch Eligible [Public School] 2022-23` ~ `White Students [Public School] 2022-23` + `Black or African American Students [Public School] 2022-23` + `Hispanic Students [Public School] 2022-23` + `American Indian/Alaska Native Students [Public School] 2022-23` + `Asian or Asian/Pacific Islander [Public School] 2022-23` + `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` + `Two or More Races Students [Public School] 2022-23`, cleaned_data)
+
+summary_model_nb <- summary(negative_binomial_model)
+
+coef_table <- coef(summary_model_nb)
+exp_coef <- exp(coef_table[, "Estimate"])
+conf_intervals <- exp(confint(negative_binomial_model))
+p_values <- coef_table[, "Pr(>|z|)"]
+
+results <- data.frame(race = rownames(coef_table), rate_ratio = exp_coef, confidence_lower = conf_intervals[, 1], confidence_higher = conf_intervals[, 2], p_val = p_values)
+
+print(results)
+
+results <- results[results$race != "(Intercept)", ]
+
+ggplot(results, aes(y = race, x = rate_ratio)) + geom_point() + geom_errorbarh(aes(xmin = confidence_lower, xmax = confidence_higher), height = 0.2, color = "red") + labs(y = "Race", x = "Rate Ratio") + theme_minimal()
+
+print(summary_model_nb)
+```
+
+The second model used was a logistic regression with a binary outcome variable indicating whether a majority of students at a school are enrolled in a free lunch program. Running the code would produce summary statistics and the second plot below illustrates the relationship. We did a regression on estimating the probability of a school having the majority of its students enrolled in a free-lunch program based on the percentage of minority students the school has. `minority_percentage` has a statistically significant odds coefficient of 1.0397006 at the 5% level, implying that a 1 percentage point increase in a school’s minority population is associated with a 3.97% increase in the odds that a school has the majority of its students enrolled in a free lunch program. It can also be seen that, as the percentage of minority students at a school increases, the probability of the majority of a school’s students being enrolled in a free lunch program increases exponentially, based on the nonlinear and positive relationship illustrated.
+
+```{r}
+# Logistic Regression
+cleaned_data <- cleaned_data |>
+  mutate(minority_percentage = ((`Black or African American Students [Public School] 2022-23` + `Hispanic Students [Public School] 2022-23` + `American Indian/Alaska Native Students [Public School] 2022-23` + `Asian or Asian/Pacific Islander [Public School] 2022-23` + `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` + `Two or More Races Students [Public School] 2022-23`) / `Total Race/Ethnicity [Public School] 2022-23`) * 100) |>
+  mutate(majority_free_lunch = if_else(`Free Lunch Eligible [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` > 0.5, 1, 0))
+
+logistic_model <- glm(majority_free_lunch ~ minority_percentage, family = binomial(link = "logit"), cleaned_data)
+
+summary_model_l <- summary(logistic_model)
+
+coef_table <- coef(summary_model_l)
+exp_coef <- exp(coef_table[, "Estimate"])
+conf_intervals <- exp(confint(logistic_model))
+p_values <- coef_table[, "Pr(>|z|)"]
+
+results <- data.frame(race = rownames(coef_table), odds = exp_coef, confidence_lower = conf_intervals[, 1], confidence_higher = conf_intervals[, 2], p_val = p_values)
+
+minority_percentages <- cleaned_data |>
+  summarize(min_minority = min(minority_percentage), max_minority = max(minority_percentage))|>
+  summarize(minority_percentage = seq(min_minority, max_minority, length.out = 100))
+
+minority_percentages$predicted_probability <- predict(logistic_model, newdata = minority_percentages, type = "response")
+
+ggplot(cleaned_data, aes(x = minority_percentage, y = majority_free_lunch)) + geom_line(data = minority_percentages, aes(x = minority_percentage, y = predicted_probability)) + labs(x = "Percentage of Minorities at a School", y = "Predicted Probability") + theme_minimal()
+
+print(summary_model_l)
+print(results)
+```
+
+The analysis sheds light on some key socioeconomic issues around the country. There seems to be an evident racial disparity according to these models, where certain minority races have a greater impact on a school’s total free-lunch enrolment numbers than others, and that schools with a higher minority percentage of their student population tend to have higher chances of the majority of their student body being enrolled in these programs. This raises some questions on the factors contributing to this disparity. Does a greater proportion of American Indian/Alaska Native students or their families meet the requirements to be enrolled in a lunch program compared to Asian students? If enrollment is not automatic, could it be that students or families of certain races are more willing to apply for these free lunch programs? 
+
+
+### 3.2 - Limitations
+
+The two or more races variable might have some confounding effects on the rest of the variables (if the data collection survey allowed for people to select multiple races, i.e. selecting White + Asian rather than the singular two or more races option, then the confounding effects might be even more severe). This could lead to bias induced in the estimated rate ratios for each race. Multicollinearity might also be a problem, as it may be likely that schools with a high percentage of a certain minority group might also have a high percentage of another minority group. Another problem with the two or more races variable is that there is a lot of ambiguity, and potentially varied results if we were to split it up into the different racial combinations. For example, students who are black and asian might have different results compared to students who are hispanic and black. Having this specific information could result in better estimates for each race.
