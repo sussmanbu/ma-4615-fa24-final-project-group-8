@@ -84,7 +84,16 @@ We were specifically interested in understanding whether participation in aid pr
 ### 1.5 Additional Census Data
 
 To add further depth to our analysis, we sourced **demographic data** from the **U.S. Census Bureau**. This auxiliary dataset provides information about each state's racial breakdown at the county level. By cross-referencing this data with school locations, we aimed to identify regional patterns in enrollment trends.  
+To do this, we crossed two tables. The first being a sum of students of each race in our school data to form racial proportions for school enrollment by state/county. The second table was derived from the **TidyCensus** package. We retrieved racial data for ages 0-17 on the state/county level. The final variables included in our crossed table are: 
 
+- State 
+- difference in White proportion
+- difference in Black proportion
+- difference in Asian proportion 
+- difference in Hispanic/Latino proportion 
+
+We chose these four races to examine in terms of over/underrepresentation in school enrollment. The final table expressed a positive or negative value for each state and race, expressing whether that race was over or under represented in school enrollment. 
+- 
 ---
 
 ## SECTION 2: Data Cleaning and Pre-Processing
