@@ -112,3 +112,52 @@ race_breakdown <- clean_aid_data %>%
 
 # Display the results
 print(race_breakdown)
+
+# Calculate minority population and filter top 10 schools with least minority population
+least_minority_schools <- clean_aid_data %>%
+  mutate(
+    Minority_Population = 
+      `American Indian/Alaska Native Students [Public School] 2022-23` +
+      `Asian or Asian/Pacific Islander Students [Public School] 2022-23` +
+      `Hispanic Students [Public School] 2022-23` +
+      `Black or African American Students [Public School] 2022-23` +
+      `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` +
+      `Two or More Races Students [Public School] 2022-23`
+  ) %>%
+  arrange(Minority_Population) %>% # Sort by Minority Population in ascending order
+  head(10) %>%                     # Keep top 10 schools with least minority population
+  select(
+    `School Name`, 
+    Minority_Population, 
+    `Total Race/Ethnicity [Public School] 2022-23`
+  ) %>%
+  mutate(
+    Minority_Percentage = (Minority_Population / `Total Race/Ethnicity [Public School] 2022-23`) * 100
+  )
+
+# View the result
+print(least_minority_schools)
+
+# Filter for the Top 10 Schools with the Least Enrollment in Government Programs and calculate race percentages
+race_breakdown_for_lowest <- clean_aid_data %>%
+  filter(`School Name` %in% schools, `Total Race/Ethnicity [Public School] 2022-23` > 0) %>%
+  mutate(
+    American_Indian_Percent = `American Indian/Alaska Native Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Asian_Percent = `Asian or Asian/Pacific Islander Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Hispanic_Percent = `Hispanic Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Black_Percent = `Black or African American Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    White_Percent = `White Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Hawaiian_Percent = `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100,
+    Two_Or_More_Races_Percent = `Two or More Races Students [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` * 100
+  ) %>%
+  select(`School Name`,
+         American_Indian_Percent,
+         Asian_Percent,
+         Hispanic_Percent,
+         Black_Percent,
+         White_Percent,
+         Hawaiian_Percent,
+         Two_Or_More_Races_Percent)
+
+# Display the results
+print(race_breakdown_for_lowest)

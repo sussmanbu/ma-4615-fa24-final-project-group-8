@@ -1,13 +1,11 @@
 ---
 title: Analysis
-description: Here we provide a detailed analysis using more sophisticated statistics techniques.
+description: In this section, we present a comprehensive analysis of our findings, leveraging advanced statistical techniques to uncover meaningful patterns and relationships within the data. By integrating public school enrollment, government aid participation, and demographic data, we aim to explore the underlying factors influencing minority representation and access to resources across schools. 
 toc: true
 draft: false
 ---
 
 ![](images/Lunchbox.webp)
-
-This comes from the file `analysis.qmd`.
 
 ## Introduction
 
