@@ -66,8 +66,6 @@ We selected these variables based on their relevance as potential contributing f
 
 ### 1.4 Government-Aided Lunch Program Data
 
-You can load the data set utilized here: [**Government-Aided Lunch Program Data**](/scripts/gov_lunch_program.R)
-
 From the same **ELSI** data source, we incorporated data on **federal aid programs** (Free and Reduced Lunch Programs). This dataset, labeled **`ELSI_aid`**, includes:  
 
 - State Name  
@@ -77,7 +75,7 @@ From the same **ELSI** data source, we incorporated data on **federal aid progra
   - *Reduced Price Lunch* (split by race and age)  
 - Lowest and highest grades offered by the school.  
 
-You can load it here:  [**cleaning script**](/scripts/gov_lunch_program.R).
+You can load it here:  [**Government-Aided Lunch Program Data**](/scripts/gov_lunch_program.R).
 
 We were specifically interested in understanding whether participation in aid programs varies across racial groups and whether these trends differ by state.
 
@@ -86,9 +84,6 @@ We were specifically interested in understanding whether participation in aid pr
 ### 1.5 Additional Census Data
 
 To add further depth to our analysis, we sourced **demographic data** from the **U.S. Census Bureau**. This auxiliary dataset provides information about each state's racial breakdown at the county level. By cross-referencing this data with school locations, we aimed to identify regional patterns in enrollment trends.  
-
-The following variables were included in this dataset:  
-*INSERT VARIABLES HERE*.  
 
 ---
 
