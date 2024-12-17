@@ -297,19 +297,19 @@ Two models were used, namely, a negative binomial regression, and a logistic reg
 ```{r}
 library(MASS) # Used for negative binomial regression
 
-cleaned_data$`Free Lunch Eligible [Public School] 2022-23` <- as.numeric(cleaned_data$`Free Lunch Eligible [Public School] 2022-23`)
-cleaned_data$`Black or African American Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Black or African American Students [Public School] 2022-23`)
-cleaned_data$`White Students [Public School] 2022-23` <- as.numeric(cleaned_data$`White Students [Public School] 2022-23`)
-cleaned_data$`Hispanic Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Hispanic Students [Public School] 2022-23`)
-cleaned_data$`American Indian/Alaska Native Students [Public School] 2022-23` <- as.numeric(cleaned_data$`American Indian/Alaska Native Students [Public School] 2022-23`)
-cleaned_data$`Asian or Asian/Pacific Islander [Public School] 2022-23` <- as.numeric(cleaned_data$`Asian or Asian/Pacific Islander Students [Public School] 2022-23`)
-cleaned_data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23`)
-cleaned_data$`Two or More Races Students [Public School] 2022-23` <- as.numeric(cleaned_data$`Two or More Races Students [Public School] 2022-23`)
-cleaned_data$`Total Race/Ethnicity [Public School] 2022-23` <- as.numeric(cleaned_data$`Total Race/Ethnicity [Public School] 2022-23`)
+data$`Free Lunch Eligible [Public School] 2022-23` <- as.numeric(data$`Free Lunch Eligible [Public School] 2022-23`)
+data$`Black or African American Students [Public School] 2022-23` <- as.numeric(data$`Black or African American Students [Public School] 2022-23`)
+data$`White Students [Public School] 2022-23` <- as.numeric(data$`White Students [Public School] 2022-23`)
+data$`Hispanic Students [Public School] 2022-23` <- as.numeric(data$`Hispanic Students [Public School] 2022-23`)
+data$`American Indian/Alaska Native Students [Public School] 2022-23` <- as.numeric(data$`American Indian/Alaska Native Students [Public School] 2022-23`)
+data$`Asian or Asian/Pacific Islander [Public School] 2022-23` <- as.numeric(data$`Asian or Asian/Pacific Islander Students [Public School] 2022-23`)
+data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` <- as.numeric(data$`Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23`)
+data$`Two or More Races Students [Public School] 2022-23` <- as.numeric(data$`Two or More Races Students [Public School] 2022-23`)
+data$`Total Race/Ethnicity [Public School] 2022-23` <- as.numeric(data$`Total Race/Ethnicity [Public School] 2022-23`)
 
 # Negative Binomial Regression
 
-negative_binomial_model <- glm.nb(`Free Lunch Eligible [Public School] 2022-23` ~ `White Students [Public School] 2022-23` + `Black or African American Students [Public School] 2022-23` + `Hispanic Students [Public School] 2022-23` + `American Indian/Alaska Native Students [Public School] 2022-23` + `Asian or Asian/Pacific Islander [Public School] 2022-23` + `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` + `Two or More Races Students [Public School] 2022-23`, cleaned_data)
+negative_binomial_model <- glm.nb(`Free Lunch Eligible [Public School] 2022-23` ~ `White Students [Public School] 2022-23` + `Black or African American Students [Public School] 2022-23` + `Hispanic Students [Public School] 2022-23` + `American Indian/Alaska Native Students [Public School] 2022-23` + `Asian or Asian/Pacific Islander [Public School] 2022-23` + `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` + `Two or More Races Students [Public School] 2022-23`, data)
 
 summary_model_nb <- summary(negative_binomial_model)
 
@@ -333,11 +333,11 @@ The second model used was a logistic regression with a binary outcome variable i
 
 ```{r}
 # Logistic Regression
-cleaned_data <- cleaned_data |>
+data <- data |>
   mutate(minority_percentage = ((`Black or African American Students [Public School] 2022-23` + `Hispanic Students [Public School] 2022-23` + `American Indian/Alaska Native Students [Public School] 2022-23` + `Asian or Asian/Pacific Islander [Public School] 2022-23` + `Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2022-23` + `Two or More Races Students [Public School] 2022-23`) / `Total Race/Ethnicity [Public School] 2022-23`) * 100) |>
   mutate(majority_free_lunch = if_else(`Free Lunch Eligible [Public School] 2022-23` / `Total Race/Ethnicity [Public School] 2022-23` > 0.5, 1, 0))
 
-logistic_model <- glm(majority_free_lunch ~ minority_percentage, family = binomial(link = "logit"), cleaned_data)
+logistic_model <- glm(majority_free_lunch ~ minority_percentage, family = binomial(link = "logit"), data)
 
 summary_model_l <- summary(logistic_model)
 
@@ -348,13 +348,13 @@ p_values <- coef_table[, "Pr(>|z|)"]
 
 results <- data.frame(race = rownames(coef_table), odds = exp_coef, confidence_lower = conf_intervals[, 1], confidence_higher = conf_intervals[, 2], p_val = p_values)
 
-minority_percentages <- cleaned_data |>
+minority_percentages <- data |>
   summarize(min_minority = min(minority_percentage), max_minority = max(minority_percentage))|>
   summarize(minority_percentage = seq(min_minority, max_minority, length.out = 100))
 
 minority_percentages$predicted_probability <- predict(logistic_model, newdata = minority_percentages, type = "response")
 
-ggplot(cleaned_data, aes(x = minority_percentage, y = majority_free_lunch)) + geom_line(data = minority_percentages, aes(x = minority_percentage, y = predicted_probability)) + labs(x = "Percentage of Minorities at a School", y = "Predicted Probability") + theme_minimal()
+ggplot(data, aes(x = minority_percentage, y = majority_free_lunch)) + geom_line(data = minority_percentages, aes(x = minority_percentage, y = predicted_probability)) + labs(x = "Percentage of Minorities at a School", y = "Predicted Probability") + theme_minimal()
 
 print(summary_model_l)
 print(results)
