@@ -18,6 +18,9 @@ our_data <- read_csv(here::here("dataset", "ELSIPreliminaryDataSet.csv"), skip =
 # Clean the new data set - for Jakob's use
 new_data <- read_csv(here::here("dataset", "ELSIDataSet2.csv"), skip = 5, col_names = TRUE)
 
+# Remove the last 5 columns
+new_data <- new_data[, 1:62]
+
 # Remove rows with "†", "-", "‡", or negative values
 new_data_clean <- new_data |>
   filter_all(all_vars(!str_detect(., "†|\\–|‡"))) |>

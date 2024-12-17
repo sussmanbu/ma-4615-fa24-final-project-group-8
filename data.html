@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="We describe the sources of our data and the cleaning process.">
+<meta name="description" content="On this page, we describe the sources of our data and the cleaning process in detail. The goal is to ensure that anyone visiting our website can largely replicate our analyses by running this script on the original datasets to clean and prepare them for analysis.">
 
-<title>MA [46]15 Final Project - Data</title>
+<title>Data – MA [46]15 Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -80,7 +80,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -89,6 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -103,39 +110,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">MA [46]15 Final Project</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./big_picture.html" rel="" target="">
- <span class="menu-text">Big Picture</span></a>
+    <a class="nav-link" href="./big_picture.html"> 
+<span class="menu-text">Big Picture</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./analysis.html" rel="" target="">
- <span class="menu-text">Analysis</span></a>
+    <a class="nav-link" href="./analysis.html"> 
+<span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./data.html" rel="" target="" aria-current="page">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link active" href="./data.html" aria-current="page"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -148,14 +155,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-makes-a-good-data-set" id="toc-what-makes-a-good-data-set" class="nav-link active" data-scroll-target="#what-makes-a-good-data-set">What makes a good data set?</a></li>
-  <li><a href="#where-to-keep-data" id="toc-where-to-keep-data" class="nav-link" data-scroll-target="#where-to-keep-data">Where to keep data?</a>
+  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link active" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
+  <li><a href="#section-1-data-sources" id="toc-section-1-data-sources" class="nav-link" data-scroll-target="#section-1-data-sources">SECTION 1: Data Sources</a>
   <ul class="collapse">
-  <li><a href="#sharing-your-data" id="toc-sharing-your-data" class="nav-link" data-scroll-target="#sharing-your-data">Sharing your data</a></li>
-  <li><a href="#load-and-clean-data-script" id="toc-load-and-clean-data-script" class="nav-link" data-scroll-target="#load-and-clean-data-script">Load and clean data script</a></li>
+  <li><a href="#load-data-script" id="toc-load-data-script" class="nav-link" data-scroll-target="#load-data-script">1.1 Load Data Script</a></li>
   </ul></li>
-  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
-  <li><a href="#our-work-on-this-page" id="toc-our-work-on-this-page" class="nav-link" data-scroll-target="#our-work-on-this-page">Our work: On this page</a></li>
+  <li><a href="#data-sourcing" id="toc-data-sourcing" class="nav-link" data-scroll-target="#data-sourcing">1.2 Data Sourcing</a>
+  <ul class="collapse">
+  <li><a href="#key-variables-in-cleaned-data-set" id="toc-key-variables-in-cleaned-data-set" class="nav-link" data-scroll-target="#key-variables-in-cleaned-data-set">1.3 Key Variables in Cleaned Data Set</a></li>
+  <li><a href="#government-aided-lunch-program-data" id="toc-government-aided-lunch-program-data" class="nav-link" data-scroll-target="#government-aided-lunch-program-data">1.4 Government-Aided Lunch Program Data</a></li>
+  <li><a href="#additional-census-data" id="toc-additional-census-data" class="nav-link" data-scroll-target="#additional-census-data">1.5 Additional Census Data</a></li>
+  </ul></li>
+  <li><a href="#section-2-data-cleaning-and-pre-processing" id="toc-section-2-data-cleaning-and-pre-processing" class="nav-link" data-scroll-target="#section-2-data-cleaning-and-pre-processing">SECTION 2: Data Cleaning and Pre-Processing</a>
+  <ul class="collapse">
+  <li><a href="#cleaning-school-enrollment-data" id="toc-cleaning-school-enrollment-data" class="nav-link" data-scroll-target="#cleaning-school-enrollment-data">2.1 <strong>Cleaning School Enrollment Data</strong></a></li>
+  <li><a href="#cleaning-government-lunch-program-data" id="toc-cleaning-government-lunch-program-data" class="nav-link" data-scroll-target="#cleaning-government-lunch-program-data">2.2 <strong>Cleaning Government Lunch Program Data</strong></a></li>
+  <li><a href="#cleaning-census-data" id="toc-cleaning-census-data" class="nav-link" data-scroll-target="#cleaning-census-data">2.3 <strong>Cleaning Census Data</strong></a></li>
+  </ul></li>
+  <li><a href="#section-3-final-notes" id="toc-section-3-final-notes" class="nav-link" data-scroll-target="#section-3-final-notes">SECTION 3: Final Notes</a></li>
   </ul>
 </nav>
     </div>
@@ -169,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    We describe the sources of our data and the cleaning process.
+    On this page, we describe the sources of our data and the cleaning process in detail. The goal is to ensure that anyone visiting our website can largely replicate our analyses by running this script on the original datasets to clean and prepare them for analysis.
   </div>
 </div>
 
@@ -182,42 +199,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
+
 <p><img src="images/data-import-cheatsheet-thumbs.png" class="img-fluid"></p>
-<p>This comes from the file <code>data.qmd</code>.</p>
-<p>Your first steps in this project will be to find data to work on.</p>
-<p>I recommend trying to find data that interests you and that you are knowledgeable about. A bad example would be if you have no interest in video games but your data set is about video games. I also recommend finding data that is related to current events, social justice, and other areas that have an impact.</p>
-<p>Initially, you will study <em>one dataset</em> but later you will need to combine that data with another dataset. For this reason, I recommend finding data that has some date and/or location components. These types of data are conducive to interesting visualizations and analysis and you can also combine this data with other data that also has a date or location variable. Data from the census, weather data, economic data, are all relatively easy to combine with other data with time/location components.</p>
-<section id="what-makes-a-good-data-set" class="level2">
-<h2 class="anchored" data-anchor-id="what-makes-a-good-data-set">What makes a good data set?</h2>
+<hr>
+<section id="rubric-on-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
+<p>You will</p>
 <ul>
-<li>Data you are interested in and care about.</li>
-<li>Data where there are a lot of potential questions that you can explore.</li>
-<li>A data set that isn’t completely cleaned already.</li>
-<li>Multiple sources for data that you can combine.</li>
-<li>Some type of time and/or location component.</li>
+<li>Describe where/how to find data.
+<ul>
+<li>You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.</li>
+<li>Why was the data collected/curated? Who put it together? (This is important, if you don’t know why it was collected then that might not be a good dataset to look at.</li>
+</ul></li>
+<li>Describe the different data files used and what each variable means.
+<ul>
+<li>If you have many variables then only describe the most relevant ones and summarize the rest.</li>
+</ul></li>
+<li>Describe any cleaning you had to do for your data.
+<ul>
+<li>You <em>must</em> include a link to your <code>load_and_clean_data.R</code> file.</li>
+<li>Rename variables and recode factors to make data more clear.</li>
+<li>Also, describe any additional R packages you used outside of those covered in class.</li>
+<li>Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.</li>
+<li>Some repetition of what you do in your <code>load_and_clean_data.R</code> file is fine and encouraged if it helps explain what you did.</li>
+</ul></li>
+<li>Organization, clarity, cleanliness of the page
+<ul>
+<li>Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.</li>
+<li>This page should be self-contained.</li>
+</ul></li>
 </ul>
 </section>
-<section id="where-to-keep-data" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-keep-data">Where to keep data?</h2>
-<p>Below 50mb: In <code>dataset</code> folder</p>
-<p>Above 50mb: In <code>dataset_ignore</code> folder. This folder will be ignored by <code>git</code> so you’ll have to manually sync these files across your team.</p>
-<section id="sharing-your-data" class="level3">
-<h3 class="anchored" data-anchor-id="sharing-your-data">Sharing your data</h3>
-<p>For small datasets (&lt;50mb), you can use the <code>dataset</code> folder that is tracked by github. Add the files just like you would any other file.</p>
-<p>If you create a folder named <code>data</code> this will cause problems.</p>
-<p>For larger datasets, you’ll need to create a new folder in the project root directory named <code>dataset-ignore</code>. This will be ignored by git (based off the <code>.gitignore</code> file in the project root directory) which will help you avoid issues with Github’s size limits. Your team will have to manually make sure the data files in <code>dataset-ignore</code> are synced across team members.</p>
-<p>Your <a href="./scripts/load_and_clean_data.R">load_and_clean_data.R</a> file is how you will load and clean your data. Here is a an example of a very simple one.</p>
+<section id="section-1-data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-data-sources">SECTION 1: Data Sources</h2>
+<section id="load-data-script" class="level3">
+<h3 class="anchored" data-anchor-id="load-data-script">1.1 Load Data Script</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/load_and_clean_data.R"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span> <span class="co"># Use echo=FALSE or omit it to avoid code output  </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/clean_data.R"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span> <span class="co"># Use echo = FALSE or omit to suppress code output</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; library(tidyverse)</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -228,43 +252,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; loan_data &lt;- read_csv(here::here("dataset", "loan_refusal.csv"))</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 20 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): bank
-dbl (4): min, white, himin, hiwhite
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; loan_data_clean &lt;- pivot_longer(loan_data, 2:5, names_to = "group", 
-+     values_to = "refusal_rate")
-
-&gt; write_rds(loan_data_clean, file = here::here("dataset", 
-+     "loan_refusal_clean.rds"))</code></pre>
-</div>
-</div>
-<p>You should never use absolute paths (eg. <code>/Users/danielsussman/path/to/project/</code> or <code>C:\MA415\\Final_Project\</code>).</p>
-<p>You might consider using the <code>here</code> function from the <a href="https://here.r-lib.org/articles/here.html"><code>here</code> package</a> to avoid path problems.</p>
-</section>
-<section id="load-and-clean-data-script" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-clean-data-script">Load and clean data script</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/clean_data.R"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span> <span class="co"># Use echo=FALSE or omit it to avoid code output  </span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/maikatakemoto/Downloads/Fall 2024/MA415/Final Project/ma-4615-fa24-final-project-group-8</code></pre>
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+here() starts at /Users/richardpilleul/Documents/Boston University/Fall 24/CAS MA 415/HW3/ma-4615-fa24-final-project-group-8</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
@@ -273,10 +262,8 @@ e.g.:
   problems(dat)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 104698 Columns: 57</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Column specification ────────────────────────────────────────────────────────
+<pre><code>Rows: 104698 Columns: 57
+── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (57): School Name, State Name [Public School] Latest available year, Gra...
 
@@ -320,93 +307,245 @@ chr (67): School Name, State Name [Public School] Latest available year, Gra...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: There were 14 warnings in `filter()`.
+<pre><code>Warning: There were 4 warnings in `filter()`.
 The first warning was:
 ℹ In argument: `&amp;...`.
 Caused by warning in `` as.numeric(`School Name`) &gt;= 0 | is.na(as.numeric(`School Name`)) ``:
 ! NAs introduced by coercion
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 13 remaining warnings.</code></pre>
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.</code></pre>
 </div>
 </div>
-<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> which appears as <a href="./scripts/load_and_clean_data.R">cleaning script</a>.</p>
+<p>First, you can load the data set here: <a href="./scripts/clean_data.R"><strong>cleaning script</strong></a>.</p>
 <hr>
 </section>
 </section>
-<section id="rubric-on-this-page" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
-<p>You will</p>
+<section id="data-sourcing" class="level2">
+<h2 class="anchored" data-anchor-id="data-sourcing">1.2 Data Sourcing</h2>
+<p>Our analysis begins with <strong>base data</strong> obtained from the <a href="https://nces.ed.gov/ccd/elsi/">National Center of Education Statistics (NCES)</a>, a federal agency appointed to serve the U.S. Department of Education. This data comes from two primary surveys:</p>
+<ol type="1">
+<li><strong>The Common Core of Data (CCD)</strong><br>
+</li>
+<li><strong>The Private School Survey (PSS)</strong></li>
+</ol>
+<p>Both surveys integrate data from additional sources, including state dropout and completion data files and the Local Education Agency Universal Survey. Additionally, finance data was utilized for certain variables. These datasets were originally collected by the <strong>Institute of Education Sciences</strong> to analyze education trends and further initiatives to improve access to higher education.</p>
+<p>While the data is accessible directly from the NCES, the retrieval process can be tedious, as it is collected at state and local levels.</p>
+<p>In our <code>clean_data.R</code> script, we used the <strong><code>tidyverse</code></strong> package to efficiently manipulate and prepare the data for analysis. The script:</p>
 <ul>
-<li>Describe where/how to find data.
+<li>Reads an RData file (<code>clean_data.R</code>) located in the <code>datasets</code> directory.<br>
+</li>
+<li>Saves the cleaned version as an <strong>RDS file</strong> (<code>our_data_clean.rds</code>) in the <code>scripts</code> directory using the <code>saveRDS()</code> function.<br>
+</li>
+<li>Uses <code>readRDS()</code> to ensure the cleaned data can be accessed easily for further exploration.</li>
+</ul>
+<hr>
+<section id="key-variables-in-cleaned-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="key-variables-in-cleaned-data-set">1.3 Key Variables in Cleaned Data Set</h3>
+<p>The cleaned dataset contains the following variables:</p>
 <ul>
-<li>You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.</li>
-<li>Why was the data collected/curated? Who put it together? (This is important, if you don’t know why it was collected then that might not be a good dataset to look at.</li>
+<li><strong>School-Level Data</strong>:
+<ul>
+<li><em>School Name</em><br>
+</li>
+<li><em>State Name</em><br>
+</li>
+<li><em>Grades 1-8 Students</em><br>
+</li>
+<li><em>Grades 9-12 Students</em><br>
+</li>
+<li><em>Male Students</em> / <em>Female Students</em></li>
 </ul></li>
-<li>Describe the different data files used and what each variable means.
+<li><strong>Race/Ethnicity Breakdown</strong>:
 <ul>
-<li>If you have many variables then only describe the most relevant ones and summarize the rest.</li>
+<li><em>American Indian/Alaska Native Students</em><br>
+</li>
+<li><em>Asian or Asian/Pacific Islander Students</em><br>
+</li>
+<li><em>Hispanic Students</em><br>
+</li>
+<li><em>White Students</em><br>
+</li>
+<li><em>Native Hawaiian or Other Pacific Islander Students</em></li>
 </ul></li>
-<li>Describe any cleaning you had to do for your data.
+<li><strong>Other Variables</strong>:
 <ul>
-<li>You <em>must</em> include a link to your <code>load_and_clean_data.R</code> file.</li>
-<li>Rename variables and recode factors to make data more clear.</li>
-<li>Also, describe any additional R packages you used outside of those covered in class.</li>
-<li>Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.</li>
-<li>Some repetition of what you do in your <code>load_and_clean_data.R</code> file is fine and encouraged if it helps explain what you did.</li>
+<li><em>Pupil/Teacher Ratio</em></li>
 </ul></li>
-<li>Organization, clarity, cleanliness of the page
+</ul>
+<p>We selected these variables based on their relevance as potential contributing factors to school enrollment trends.<br>
+- <strong>Race/Ethnicity</strong> reflects cultural disparities and access to resources in segregated communities, making it essential for analyzing systemic issues.<br>
+- <strong>Gender</strong> was included due to existing disparities in mental health and learning outcomes between males and females.<br>
+- <strong>Pupil/Teacher Ratio</strong> was considered because lower-income communities often experience resource shortages, which can affect school enrollment and perceived quality.</p>
+<hr>
+</section>
+<section id="government-aided-lunch-program-data" class="level3">
+<h3 class="anchored" data-anchor-id="government-aided-lunch-program-data">1.4 Government-Aided Lunch Program Data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"scripts/gov_lunch_program.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 104702 Columns: 75
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(75): ...1, ...2, ...3, ...4, ...5, ...6, ...7, ...8, ...9, ...10, ...11...
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`
+• `` -&gt; `...2`
+• `` -&gt; `...3`
+• `` -&gt; `...4`
+• `` -&gt; `...5`
+• `` -&gt; `...6`
+• `` -&gt; `...7`
+• `` -&gt; `...8`
+• `` -&gt; `...9`
+• `` -&gt; `...10`
+• `` -&gt; `...11`
+• `` -&gt; `...12`
+• `` -&gt; `...13`
+• `` -&gt; `...14`
+• `` -&gt; `...15`
+• `` -&gt; `...16`
+• `` -&gt; `...17`
+• `` -&gt; `...18`
+• `` -&gt; `...19`
+• `` -&gt; `...20`
+• `` -&gt; `...21`
+• `` -&gt; `...22`
+• `` -&gt; `...23`
+• `` -&gt; `...24`
+• `` -&gt; `...25`
+• `` -&gt; `...26`
+• `` -&gt; `...27`
+• `` -&gt; `...28`
+• `` -&gt; `...29`
+• `` -&gt; `...30`
+• `` -&gt; `...31`
+• `` -&gt; `...32`
+• `` -&gt; `...33`
+• `` -&gt; `...34`
+• `` -&gt; `...35`
+• `` -&gt; `...36`
+• `` -&gt; `...37`
+• `` -&gt; `...38`
+• `` -&gt; `...39`
+• `` -&gt; `...40`
+• `` -&gt; `...41`
+• `` -&gt; `...42`
+• `` -&gt; `...43`
+• `` -&gt; `...44`
+• `` -&gt; `...45`
+• `` -&gt; `...46`
+• `` -&gt; `...47`
+• `` -&gt; `...48`
+• `` -&gt; `...49`
+• `` -&gt; `...50`
+• `` -&gt; `...51`
+• `` -&gt; `...52`
+• `` -&gt; `...53`
+• `` -&gt; `...54`
+• `` -&gt; `...55`
+• `` -&gt; `...56`
+• `` -&gt; `...57`
+• `` -&gt; `...58`
+• `` -&gt; `...59`
+• `` -&gt; `...60`
+• `` -&gt; `...61`
+• `` -&gt; `...62`
+• `` -&gt; `...63`
+• `` -&gt; `...64`
+• `` -&gt; `...65`
+• `` -&gt; `...66`
+• `` -&gt; `...67`
+• `` -&gt; `...68`
+• `` -&gt; `...69`
+• `` -&gt; `...70`
+• `` -&gt; `...71`
+• `` -&gt; `...72`
+• `` -&gt; `...73`
+• `` -&gt; `...74`
+• `` -&gt; `...75`</code></pre>
+</div>
+</div>
+<p>From the same <strong>ELSI</strong> data source, we incorporated data on <strong>federal aid programs</strong> (Free and Reduced Lunch Programs). This dataset, labeled <strong><code>ELSI_aid</code></strong>, includes:</p>
 <ul>
-<li>Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.</li>
-<li>This page should be self-contained.</li>
+<li>State Name<br>
+</li>
+<li>School Name<br>
+</li>
+<li>Total number of students receiving:
+<ul>
+<li><em>Free Lunch</em> (split by race and age)<br>
+</li>
+<li><em>Reduced Price Lunch</em> (split by race and age)<br>
+</li>
+</ul></li>
+<li>Lowest and highest grades offered by the school.</li>
+</ul>
+<p>You can load it here: <a href="./scripts/gov_lunch_program.R"><strong>cleaning script</strong></a>.</p>
+<p>We were specifically interested in understanding whether participation in aid programs varies across racial groups and whether these trends differ by state.</p>
+<hr>
+</section>
+<section id="additional-census-data" class="level3">
+<h3 class="anchored" data-anchor-id="additional-census-data">1.5 Additional Census Data</h3>
+<p>To add further depth to our analysis, we sourced <strong>demographic data</strong> from the <strong>U.S. Census Bureau</strong>. This auxiliary dataset provides information about each state’s racial breakdown at the county level. By cross-referencing this data with school locations, we aimed to identify regional patterns in enrollment trends.</p>
+<p>The following variables were included in this dataset:<br>
+<em>INSERT VARIABLES HERE</em>.</p>
+<hr>
+</section>
+</section>
+<section id="section-2-data-cleaning-and-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="section-2-data-cleaning-and-pre-processing">SECTION 2: Data Cleaning and Pre-Processing</h2>
+<p>To ensure the integrity and accuracy of our analysis, we implemented a rigorous data cleaning process across all three datasets.</p>
+<section id="cleaning-school-enrollment-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-school-enrollment-data">2.1 <strong>Cleaning School Enrollment Data</strong></h3>
+<ul>
+<li><strong>Handling Missing Data</strong>:
+<ul>
+<li>Converted placeholders (<code>†</code>, <code>-</code>, <code>‡</code>) to <code>NA</code> for clarity.<br>
+</li>
+<li>Removed rows with any remaining <code>NA</code> values to maintain consistency.</li>
+</ul></li>
+<li><strong>Standardizing State Names</strong>:
+<ul>
+<li>Ensured uniform capitalization and removed duplicate state columns to avoid redundancy.</li>
+</ul></li>
+<li><strong>Eliminating Errors</strong>:
+<ul>
+<li>Removed negative values, as they represented erroneous entries.</li>
 </ul></li>
 </ul>
 <hr>
 </section>
-<section id="our-work-on-this-page" class="level2">
-<h2 class="anchored" data-anchor-id="our-work-on-this-page">Our work: On this page</h2>
-<p>The data (raw: https://nces.ed.gov/ccd/elsi/) comes from the National Center of Education Statistics, a federal agency appointed to serve the U.S. department of education. The data is collected using two primary surveys: The Common Core of Data (CCD) and the Private School Survey (PSS). The data from these two surveys come from a collection of other sources; primarily the state dropout and completion data file, and Local Education Agency Universal Survey. Finance data was also utilized for certain variables. The Institute of Education Sciences collected the data to analyze “education trends”, to further initiatives to improve access to higher education. Finding the data from the original source is possible but tedious, as data is collected by state and locally.</p>
-<p>In our <code>clean_data.R</code> file, the code snippet utilizes the <code>tidyverse</code> package to handle data manipulation and analysis tasks efficiently. It reads in a RData file named <code>clean_data.R</code> located within the <code>datasets</code> directory using the <code>load()</code> function. The cleaned data is saved as an <code>.rds</code> file named <code>our_data_clean.rds</code> in the <code>scripts</code> directory using the <code>saveRDS</code> function. This ensures that the cleaned data set can be easily accessed and shared for future analyses. Additionally, the <code>readRDS</code> function is used to read the saved <code>.rds</code> file, enabling the retrieval of the cleaned data set for further processing or exploration.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"scripts/clean_data.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 104698 Columns: 57
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (57): School Name, State Name [Public School] Latest available year, Gra...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-Rows: 104698 Columns: 57
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (57): School Name, State Name [Public School] Latest available year, Gra...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-Rows: 104698 Columns: 67
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (67): School Name, State Name [Public School] Latest available year, Gra...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<p>Currently, we are only looking at the one ELSI data file, but we plan to incorporate more as we progress in our project timeline for auxiliary analyses.</p>
-<p>The following variables are currently included in our dataset: School Name, State Name, Grades 1-8 Students, Grades 9-12 Students, Male Students, Female Students,American Indian/Alaska Native Students, Asian or Asian/Pacific Islander Students, Hispanic Students, White Students, Nat. Hawaiian or Other Pacific Isl. Students, and Pupil/Teacher Ratio. We chose variables to analyze which we believed were likely most important contributing factors to school enrollment. Race/Ethnicity can reflect cultural differences and disparities in access to resources in segregated communities, thus it is important to analyze how systemic issues affect enrollment and cross reference grade as well to compare effects. Gender can also have a significant effect based on certain disparities in mental health and learning disabilities that can be found between males and females. Finally, we felt Pupil/Teacher ratio was another important factor as certain school districts in lower income communities tend to be deprived of resources (due to smaller tax base), thus this could lower enrollment as parents or students may feel they get less out of school.</p>
-<p>Data Cleaning and Preprocessing - Our initial step involved data cleaning to ensure data integrity and accuracy. This included removing all ‘NA’ values based on the following criteria:</p>
-<p>‘†’ represented data that was inapplicable, which we converted to NA for clarity.<br>
-‘-’ denoted missing data,<br>
-while ‘‡’ indicated data not meeting our quality standards.<br>
-Both were also transformed to NA.<br>
-We then removed rows containing any NA values to create a consistent and reliable dataset. Additionally, all negative values were eliminated, as they were considered erroneous entries.<br>
-Moreover, some standardization of state names was done to ensure that we were not counting duplicates of states which only differed by capitalization.</p>
-<p>Future Dataset Restructuring. To support more detailed analysis, we’re considering restructuring the dataset by segmenting it into various tables based on factors like academic year, grade, and gender. Here are two specific areas of interest:</p>
-<p>Academic Year - By organizing data by academic year, we can examine trends<br>
-impacted by significant events like COVID-19. For instance, research suggests the pandemic increased “social avoidance,” particularly among male students, leading to decreased motivation for school attendance due to diminished social interaction. Among younger students, parental choices rooted in safety habits established during the pandemic may also contribute to attendance shifts. By segmenting attendance data by grade over academic years, we can better understand these nuances.</p>
-<p>Gender and Race - Our data enables us to explore how systemic issues affect enrollment patterns. Given the historical context of redlining and segregation in the U.S., students of certain racial backgrounds are more likely to reside in resource-limited areas, impacting their educational opportunities. Analyzing enrollment by race and gender can illuminate the ways these structural factors shape enrollment trends in public schools, providing insights into broader social inequities.</p>
-<p>This restructured dataset, segmented by academic year, grade, gender, and race, will allow us to uncover patterns and generate insights into the various influences on school enrollment and attendance, supporting a comprehensive analysis of educational trends and their underlying factors.</p>
+<section id="cleaning-government-lunch-program-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-government-lunch-program-data">2.2 <strong>Cleaning Government Lunch Program Data</strong></h3>
+<ul>
+<li>Minimal cleaning was required for this dataset.<br>
+</li>
+<li>Columns were added for consistency with the <strong>school enrollment data</strong>:
+<ul>
+<li>Limited the time frame to school years <strong>2018–2019 to 2022–2023</strong>.<br>
+</li>
+<li>Removed redundant constant columns, such as repeated state names.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="cleaning-census-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-census-data">2.3 <strong>Cleaning Census Data</strong></h3>
+<p>The <strong>U.S. Census data</strong> required additional cleaning due to its treatment of <em>Hispanic/Latino</em> as an ethnicity rather than a race. This differs from our school enrollment dataset, which classifies <em>Hispanic</em> as a race.</p>
+<p>To address this discrepancy:<br>
+- We created a new <em>Hispanic</em> category from the Census ethnicity data.<br>
+- Adjusted the remaining racial categories proportionally to reflect non-Hispanic populations.</p>
+<p>While this approach is not a perfect representation, it preserves the general proportions needed for meaningful analysis.</p>
+<hr>
+</section>
+</section>
+<section id="section-3-final-notes" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-final-notes">SECTION 3: Final Notes</h2>
+<p>The cleaned and standardized datasets allow us to uncover patterns and generate insights into various influences on school enrollment, participation in federal aid programs, and demographic trends. This pre-processed data provides a robust foundation for the analysis presented in subsequent sections.</p>
+<hr>
 
 
 </section>
@@ -447,18 +586,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -490,11 +618,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/ma-4615-fa24-final-project-group-8\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -504,8 +671,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -517,7 +693,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -561,6 +860,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -586,6 +886,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -646,6 +972,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
