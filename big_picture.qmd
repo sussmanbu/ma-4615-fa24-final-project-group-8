@@ -1,6 +1,6 @@
 ---
 title: "Big Picture"
-description: "A 538/Upshot style article about the data."
+#description: "A 538/Upshot style article about the data."
 toc: true
 draft: FALSE
 format:
@@ -11,118 +11,50 @@ filters:
   - shinylive
 ---
 
-![](images/The_Big_Picture_2.jpeg)
+![](images/schoolkids.jpg)
 
-This comes from the file `big_picture.Rmd`.
+# Who's Really at the Table? Connection between Minority populations to Free and Reduced School Lunch Programs
 
-Think of this page as your 538/Upshot style article. This means that you should try to tell a story through the data and your analysis. Read articles from those sites and similar sites to get a feeling for what they are like. Try to write in the style of a news or popular article. Importantly, this page should be geared towards the general public. You shouldn't assume the reader understands how to interpret a linear regression or a complicated plot. Focus on interpretation and visualizations.
+The Free and Reduced-Price Lunch Program aims to improve accessibility to students with low income-level backgrounds. Through our data analysis, we sought to determine if there is a pattern between enrollment in the Free and Reduced-Price School Lunch Program, and the racial demographic of the students enrolled.
 
+Thesis: This study examines whether enrollment in government provided Free and Reduced Lunch programs in public schools is disproportionately higher in areas with predominantly minority populations, exploring the relationship between demographic composition and reliance on government aid for school meals.
 
+## What Did We Find?
 
----
+Our analysis revealed that establishing a clear correlation between the number of minority students and enrollment rates in the Free and Reduced Lunch Programs is challenging. However, as highlighted on our Analysis page, we observed a trend where schools with higher African American and Hispanic populations tend to have higher enrollment rates in these programs. On this page, we delve deeper into this trend and explore other potential factors that may contribute to this pattern.
 
+### Texas, Michigan, Florida, and Alaska have the highest number of public schools
 
-### Interactive
+![](images/schooldist.png)
+From the above bar chart, we can see that states like Texas, Michigan, Florida, and Alaska have the highest number of public schools. On the other hand, states like District of Columbia, Maine, Rhode Island and North Dakota had some of the lowest public school counts. This could also be explained by other factors such as size of population, socioeconomic demographics, age structure of the state.
 
-You will also be required to make an interactive dashboard like [this one](/flex/flex.html).
+### Schools and Minority Proportions across States: Maryland leads, whereas District of Columbia witnesses an overall dip
 
-Your Big Data page should also include a small interactive dashboard. The dashboard should be created either using Shinylive, as below. This interactive component should in some way support your thesis from your big picture page. Good interactives often provide both high-level understanding of the data while allowing a user to investigate specific scenarios, observations, subgroups, etc.
+![](images/states_highminority.png)
+![](images/states_overtime.png)
+Races were categorized into "Minority" and "Non-Minority" groups. "White Students" were explicitly classified as Non-Minority, while the following racial categories were identified as Minority: "American Indian/Alaska Native Students," "Asian or Asian/Pacific Islander Students," "Hispanic Students," "Black or African American Students," "Nat. Hawaiian or Other Pacific Isl. Students," and "Two or More Races Students."
 
+Based on this, we created a bar chart for the top 10 with highest minority proportion, with Maryland, Rhode Island and Connecticut leading. Through the line graph above, we notice that states like Maryland have had an overall increase in the proportion of public school students from minority backgrounds from 2018 to 2022. Meanwhile, Rhode Island had an increase from 2018 to 2020, but experienced a dip from 2020 onwards. While we see a slight overall increase in minority proportion across most states, we noticed a gradual decrease from 2018 to 2022 for the District of Columbia.
 
+![](images/school_overtime.png)
+We also found the top 10 schools, across the United States, with highest minority proportion enrollment, and analyzed the trends over the same time period of 2018 to 2022. We observed certain schools, like Mcintyre Comprehensive Academy, and Robert C Hatch High School to have the highest minority proportions. Schools like Adak and Akutan, on the other hand, experienced a higher growth rate in student minority proportions.
 
+### Breakdown of minority population within top 10 schools with least enrollment
 
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 640 # You will have to adjust this to fit everything
+![](images/output.png)
+The schools listed above, filtered to include only those with a student population of 100 or more, have the lowest enrollment rates in the Free and Reduced Lunch Programs. These schools were further analyzed by race to explore whether there is any correlation between a smaller minority population and lower enrollment percentages. The findings are as follows:
 
+![](images/lowestenroll.png)
+While some schools had a predominantly non-minority population, contrary to our initial hypothesis, many of these schools also exhibited a significant Hispanic or overall minority population. This suggests that other factors may be influencing enrollment in the Free and Reduced Lunch Programs beyond the minority population size.
 
-library(shiny)
-library(tidyverse)
-options("readr.edition" = 1) # keep this to ensure you can download the data
+### Breakdown of Hispanic and African American Students in schools not in the top 10 for highest government lunch program enrollment
 
+![](images/racedist.png)
+![](images/lunchdist.png)
+Since we found the highest correlation between schools that had the largest population of Hispanic and African American students and the highest enrollment rates in the government programs, we wanted to explore the distribution of Black and Hispanic students across other schools as well. We observe some patterns, for instance, Duncanville H S has moderately high proportions of both Hispanic and Black students (approximately 42% and 54%) and has the second-highest number of enrollments for the Free and reduced lunch program. At the same time, Brooklyn technical high school has the highest enrollment in the lunch program, but has the lowest percentage of Hispanic and Black students. 
 
-# Define UI for app that draws a histogram ----
-ui <- fluidPage(
+### Findings from our statistical analysis: Minority Representation Influence Free-Lunch Enrollment, with Notable Trends for Native and Asian Students
 
-  # App title ----
-  titlePanel("Hello Shiny!"),
-
-  # Sidebar layout with input and output definitions ----
-  verticalLayout(
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30),
-
-      # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
-
-  )
-)
-
-# Define server logic required to draw a histogram ----
-server <- function(input, output) {
-  # The URL below has to point to a dataset on your github pages website
-  # I recommend creating a small-ish rds file that has only the data relevant to 
-  # the interactive.
-  data <- read_rds("https://sussmanbu.github.io/ma4615-final-project-quarto/dataset/loan_refusal_clean.rds")
-  
-  output$distPlot <- renderPlot({
-    ggplot(data, aes(x = refusal_rate)) +
-      geom_histogram(bins = input$bins + 1)
-
-  })
-
-}
-
-# Create Shiny app ----
-shinyApp(ui = ui, server = server)
-```
-
----
-
-## Rubric: On this page
-
-You will
-
-* Title
-  * Your big picture page should have a creative/click-bait-y title/headline that provides a hint about your thesis.
-* Clarity of Explanation
-  * You should have a clear thesis/goal for this page. What are you trying to show? Make sure that you explain your analysis in detail but don't go into top much mathematics or statistics. The audience for this page is the general public (to the extent possible). Your thesis should be a statement, not a question.
-  * Each figure should be very polished and also not too complicated. There should be a clear interpretation of the figure so the figure has a clear purpose. Even something like a histogram can be difficult to interpret for non-experts.
-* Creativity
-  * Do your best to make things interesting. Think of a story. Think of how each part of your analysis supports the previous part or provides a different perspective.
-* Interactive component
-  * Quality and ease of use of the interactive components.
-Is it clear what can be explored using your interactive components?
-Does it enhance and reinforce your conclusions?
-* This page should be self-contained.
-  
-**Note**: This page should have no code visible, i.e. use `#| echo: FALSE`.  
+As part of the analysis, a logistic regression and a negative binomial regression was used to investigate the relationship between minority racial groups and enrollment in free-lunch programs in schools. The logistic regression shows that schools with higher percentages of minority students have exponentially higher chances of a majority of their student body being enrolled in a free-lunch program. The negative binomial regression shows that American Indian/Alaska Native students are associated most with an increased enrollment in free-lunch programs in a particular school, while Asian or Asian/Pacific Islander students are the only group associated with decreased enrollment in these programs at a particular school.
 
 
-
-
-## Rubric: Other components
-
-### Video Recording
-
-Make a video recording (probably using Zoom) demonstrating your interactive components.
-You should provide a quick explanation of your data and demonstrate some of the conclusions from your EDA.
-This video should be no longer than 4 minutes.
-Include a link to your video (and password if needed) in your README.md file on your Github repository. You are not required to provide a link on the website.
-This can be presented by any subset of the team members.
-
-
-### Rest of the Site
-
-Finally, here are important things to keep in mind for the rest of the site. 
-
-The main title of your page is informative.
-Each post has an author/description/informative title.
-All lab required posts are present.
-Each page (including the home page) has a nice featured image associated with it.
-Your about page is up to date and clean.
-You have removed the generic posts from the initial site template.
